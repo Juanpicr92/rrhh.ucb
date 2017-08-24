@@ -16,14 +16,18 @@
 
         <!-- BEGIN MAIN MENU -->
         <ul id="main-menu" class="gui-controls">
-
             <li>
                 <a href="{{ route('persona.index') }}" >
-                    <div class="gui-icon"><i class="md md-home"></i></div>
+                    <div class="gui-icon"><i class="md md-people"></i></div>
                     <span class="title">Personas</span>
                 </a>
             </li><!--end /menu-li -->
-
+            <li>
+                <a href="{{ route('importExport') }}" >
+                    <div class="gui-icon"><i class="md md-file-upload"></i></div>
+                    <span class="title">Importar Excel</span>
+                </a>
+            </li><!--end /menu-li -->
         </ul><!--end .main-menu -->
         <!-- END MAIN MENU -->
 

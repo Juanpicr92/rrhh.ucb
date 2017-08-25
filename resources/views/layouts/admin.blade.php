@@ -32,6 +32,8 @@
     <link href="{{ asset('css/theme-default/libs/dropzone/dropzone-theme.css?1424887864') }}" rel="stylesheet" type='text/css'>
 
 
+    <link href="{{ asset('css/theme-default/libs/bootstrap-datepicker/datepicker3.css') }}" rel="stylesheet">
+
     <!-- END STYLESHEETS -->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -47,6 +49,7 @@
     <script src="{{ asset('js/libs/spin.js/spin.min.js') }}"></script>
     <script src="{{ asset('js/libs/autosize/jquery.autosize.min.js') }}"></script>
     <script src="{{ asset('js/libs/nanoscroller/jquery.nanoscroller.min.js') }}"></script>
+    <script src="{{ asset('js/libs/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('js/core/source/App.js') }}"></script>
     <script src="{{ asset('js/core/source/AppNavigation.js') }}"></script>
     <script src="{{ asset('js/core/source/AppOffcanvas.js') }}"></script>

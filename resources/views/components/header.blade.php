@@ -7,7 +7,7 @@
                 <li class="header-nav-brand" >
                     <div class="brand-holder">
                         <a href="#">
-                            <span class="text-lg text-bold text-primary">MIGAS</span>
+                            <span class="text-lg text-bold text-primary">UCB</span>
                         </a>
                     </div>
                 </li>
@@ -21,40 +21,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="headerbar-right">
             <ul class="header-nav header-nav-options">
-                <li>
-                    <!-- Search form -->
-                    <form class="navbar-search" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
-                        </div>
-                        <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-                    </form>
-                </li>
-                <li class="dropdown hidden-xs">
-                    <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
-                        <i class="fa fa-bell"></i><sup class="badge style-danger">4</sup>
-                    </a>
-                    <ul class="dropdown-menu animation-expand">
-                        <li class="dropdown-header">Today's messages</li>
-                        <li>
-                            <a class="alert alert-callout alert-warning" href="javascript:void(0);">
-                                <img class="pull-right img-circle dropdown-avatar" src="{{ asset('img/avatar2.jpg') }}" alt="" />
-                                <strong>Alex Anistor</strong><br/>
-                                <small>Testing functionality...</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="alert alert-callout alert-info" href="javascript:void(0);">
-                                <img class="pull-right img-circle dropdown-avatar" src="{{ asset('img/avatar3.jpg') }}" alt="" />
-                                <strong>Alicia Adell</strong><br/>
-                                <small>Reviewing last changes...</small>
-                            </a>
-                        </li>
-                        <li class="dropdown-header">Options</li>
-                        <li><a href="#">View all messages <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
-                        <li><a href="#">Mark as read <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
-                    </ul><!--end .dropdown-menu -->
-                </li><!--end .dropdown -->
                 <li class="dropdown hidden-xs">
                     <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
                         <i class="fa fa-area-chart"></i>
@@ -96,7 +62,7 @@
                     <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
                         <img src="{{ asset('img/avatar1.jpg?1403934956') }}" alt="" />
                         <span class="profile-info">
-									Daniel Johnson
+									{{ Auth::user()->name }}
 									<small>Administrator</small>
 								</span>
                     </a>

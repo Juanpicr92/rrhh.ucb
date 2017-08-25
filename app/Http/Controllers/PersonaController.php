@@ -20,11 +20,11 @@ class PersonaController extends Controller
 
 	public function getTasks()
 	{
-		$persona = Persona::select(['documento','paterno','materno','nombres']);
+		$persona = Persona::select('*');
 
-		return Datatables::of($persona)
-
-		                 ->make(true);
+		return Datatables::of($persona)->addColumn('action', function ($persona) {
+			return '<a href="#edit-'.$persona->documento.'" class="btn btn-icon-toggle" style="background: #0aa89e"><i class="fa fa-pencil" style="color: white" ></i></a>';
+		})->make(true);
 	}
 
     /**

@@ -28,6 +28,10 @@
     <link href="{{ asset('css/theme-default/libs/DataTables/jquery.dataTables.css') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-default/libs/DataTables/extensions/dataTables.colVis.css') }}" rel="stylesheet">
     <link href="{{ asset('css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme-default/libs/wizard/wizard.css?1425466601') }}" rel="stylesheet" type='text/css'>
+    <link href="{{ asset('css/theme-default/libs/dropzone/dropzone-theme.css?1424887864') }}" rel="stylesheet" type='text/css'>
+
+
     <!-- END STYLESHEETS -->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -54,6 +58,9 @@
     <script src="{{ asset('js/libs/DataTables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/libs/DataTables/extensions/ColVis/js/dataTables.colVis.min.js') }}"></script>
     <script src="{{ asset('js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script>
+    <script src="{{ asset('js/libs/dropzone/dropzone.min.js') }}"></script>
+
+
     <!-- END JAVASCRIPT -->
 
 </head>

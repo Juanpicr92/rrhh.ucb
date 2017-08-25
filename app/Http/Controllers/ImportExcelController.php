@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-
+use App\aux_excel;
 use App\ImportExcel;
 
 use Illuminate\Support\Facades\DB;
 
 use Maatwebsite\Excel\Facades\Excel;
+
+use Yajra\Datatables\Datatables;
 
 class ImportExcelController extends Controller
 {
@@ -41,6 +43,14 @@ class ImportExcelController extends Controller
 
         })->download($type);
 
+    }
+
+    public function getAuxImport(){
+        $persona = aux_excel::select(['id','documento','paterno','materno','ap_casada','nombres','nombre_completo', 'mes','gestion','admn','acad']);
+
+        return Datatables::of($persona)
+
+            ->make(true);
     }
 
     public function importExcel()

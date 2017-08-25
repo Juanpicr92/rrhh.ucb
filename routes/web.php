@@ -4,6 +4,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 Route::get('importExport', 'ImportExcelController@importExport');
+Route::get('importExport/preview', 'ImportExcelController@getAuxImport')->name('datatable.preview');
 
 Route::get('downloadExcel/{type}', 'ImportExcelController@downloadExcel');
 

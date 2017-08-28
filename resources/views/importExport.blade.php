@@ -29,7 +29,7 @@
                             <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
                             <ul class="nav nav-justified">
                                 <li class="active"><a href="#step1" data-toggle="tab"><span class="step">1</span> <span class="title">Seleccionar Archivo</span></a></li>
-                                <li><a href="#step2" data-toggle="tab"><span class="step">2</span> <span class="title">ACCOUNT</span></a></li>
+                                <li><a id="paso2" href="#step2" data-toggle="tab"><span class="step">2</span> <span class="title">ACCOUNT</span></a></li>
                                 <li><a href="#step3" data-toggle="tab"><span class="step">3</span> <span class="title">SETTINGS</span></a></li>
                                 <li><a href="#step4" data-toggle="tab"><span class="step">4</span> <span class="title">CONFIRM</span></a></li>
                             </ul>
@@ -43,13 +43,19 @@
                                             <header>Drag and drop uploader</header>
                                         </div>
                                         <div class="card-body no-padding">
+
+
+
+
+
+
                                             <form action="{{ URL::to('importExcel') }}" class="dropzone" id="my-awesome-dropzone" method="POST" enctype="multipart/form-data">
                                                 {{ csrf_field() }}
                                                 <div class="dz-message">
                                                     <h3>Arrastra el archivo excel aqui, o haz click para subir el archivo.</h3>
                                                     <em>(Debe utilizar el formato de la plantilla.)</em>
                                                 </div>
-                                                <a href="#step2"><button type="submit" class="form-control btn btn-success">Subir</button></a>
+                                                <!--a href="#step2"><button type="submit" class="form-control btn btn-success">Subir</button></a-->
                                             </form>
                                         </div><!--end .card-body -->
                                     </div><!--end .card -->
@@ -61,7 +67,7 @@
                                 <div class="container">
                                     <table id="task" class="table table-hover table-condensed">
                                         <thead>
-                                        <th>
+                                        <tr>
 
                                             <th>ID</th>
                                             <th>Documento</th>
@@ -74,6 +80,7 @@
                                             <th>mes</th>
                                             <th>admn</th>
                                             <th>acad</th>
+
                                         </tr>
                                         </thead>
                                     </table>
@@ -150,7 +157,23 @@
     </div><!--end .col -->
 </div><!--end .row -->
 <!-- END VALIDATION FORM WIZARD -->
+<script type="text/javascript">
+    Dropzone.options.myAwesomeDropzone = {
 
+        success: function(){
+            oTable.ajax.reload(null,false);
+            $('#paso2').click();
+            //oTable.data.reload();
+        },
+
+        /*init: function() {
+            this.on("addedfile", function(file) { alert("Added file."); });
+        }*/
+    };
+
+    rootwizard2
+
+</script>
 
 
 

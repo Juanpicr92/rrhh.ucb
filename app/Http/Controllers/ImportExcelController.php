@@ -57,9 +57,9 @@ class ImportExcelController extends Controller
 
     {
 
-        if(Input::hasFile('import_file')){
+        if(Input::hasFile('file')){
 
-            $path = Input::file('import_file')->getRealPath();
+            $path = Input::file('file')->getRealPath();
 
             $data = Excel::load($path, function($reader) {
 
@@ -78,7 +78,7 @@ class ImportExcelController extends Controller
                                     'nombres' => $value->materno,
                                     'mes' => $value->mes,
                                     'gestion' => $value->gestion,
-                                    'admn' => $value->adm,
+                                    'admn' => $value->admn,
                                     'acad' => $value->acad,
                                 ];
 
@@ -95,6 +95,8 @@ class ImportExcelController extends Controller
             }
 
         }
+
+        else{dd('Insert Record successfully.');}
 
         return back();
 

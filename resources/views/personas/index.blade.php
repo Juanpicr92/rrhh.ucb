@@ -9,9 +9,19 @@
 				<h2>Registro de Restaurantes</h2>
 				<div class="col-md-12 form" role="form">
 					{!! Form::open(['action'=>'PersonaController@store','files'=>true, 'method'=>'POST']) !!}
+					<div class="form-group floating-label {{ $errors->has('paterno') ? 'has-error' : ''}}">
+						{!! Form::text('paterno',null,['id'=>'paterno', 'name'=>'paterno', 'class'=>'form-control', 'value'=>"{{ old('paterno') }}"]) !!}
+						{!! Form::label('Apellido Paterno:') !!}
+						<span class="text-danger">{{ $errors->first('paterno') }}</span>
+					</div>
+					<div class="form-group floating-label {{ $errors->has('materno') ? 'has-error' : ''}}">
+						{!! Form::text('name',null,['id'=>'materno', 'name'=>'materno', 'class'=>'form-control', 'value'=>"{{ old('materno') }}"]) !!}
+						{!! Form::label('Apellido Materno:') !!}
+						<span class="text-danger">{{ $errors->first('materno') }}</span>
+					</div>
 					<div class="form-group floating-label {{ $errors->has('name') ? 'has-error' : ''}}">
 						{!! Form::text('name',null,['id'=>'name', 'name'=>'name', 'class'=>'form-control', 'value'=>"{{ old('name') }}"]) !!}
-						{!! Form::label('Nombre:') !!}
+						{!! Form::label('Nombres:') !!}
 						<span class="text-danger">{{ $errors->first('name') }}</span>
 					</div>
 					<div class="form-group control-width-normal">
@@ -36,7 +46,7 @@
 	<section class="card col-md-11 col-md-offset-1  style-default-bright" style="margin-top: 10px;margin-left: 1%;width: 98%;">
 		<div class="section-body">
 			<h2 class="text-primary">Listado de Personal</h2>
-			<table id="task" class="table table-hover" style="width: 99%;font-size: smaller;">
+			<table id="task" class="table table-hover" style="width: 98%;font-size: smaller;">
 				<thead>
 				<tr>
 					<th>Regional</th>
@@ -69,8 +79,8 @@
 					{data: 'paterno', name: 'paterno'},
 					{data: 'materno', name: 'materno'},
 					{data: 'ap_casada', name: 'ap_casada'},
-                    {data: 'genero', name: 'genero'},
                     {data: 'nombres', name: 'nombres'},
+                    {data: 'genero', name: 'genero'},
                     {data: 'nacionalidad', name: 'nacionalidad'},
                     {data: 'fechanacimiento', name: 'fechanacimiento'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -78,7 +88,7 @@
 			});
 		});
         $('.datepicker').datepicker({
-            format: 'mm/dd/yyyy',
+            format: 'dd/mm/yyyy',
             startDate: '-3d'
         });
 	</script>

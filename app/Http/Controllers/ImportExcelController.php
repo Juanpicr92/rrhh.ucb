@@ -48,7 +48,7 @@ class ImportExcelController extends Controller
     }
 
     public function getAuxImport(){
-        $persona = aux_excel::select(['id','documento','paterno','materno','ap_casada','nombres','nombre_completo', 'mes','gestion','admn','acad']);
+        $persona = aux_excel::select(['id','documento','paterno','materno','ap_casada','nombres','nombre_completo', 'mes','gestion','admn','acad','matched']);
 
         return Datatables::of($persona)
 
@@ -81,7 +81,7 @@ class ImportExcelController extends Controller
                                     'mes' => $value->mes,
                                     'gestion' => $value->gestion,
                                     'admn' => $value->admn,
-                                    'acad' => $value->acad,
+                                    'acad' => $value->acad
                                 ];
 
                 }

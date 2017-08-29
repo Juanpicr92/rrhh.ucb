@@ -1,30 +1,20 @@
 @extends('layouts.admin')
 @section('content')
 
-<nav class="navbar navbar-default">
+    <style>
+        .hide_column{display: none}
+    </style>
 
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-
-            <a class="navbar-brand" href="#">Importar planillas en formato Excel</a>
-
-        </div>
-
-    </div>
-
-</nav>
-
-<div class="alert alert-info"> <div class="col-3">Para subir los datos es necesario que se cumpla la estructura de la plantilla, <strong>por favor descargue la plantilla.</strong></div>
-        <div class="col-3" align="right"><a href="/Documentos/plantilla.xlsx"><button class="btn btn-success">Descargar Plantilla de Datos</button></a></div>
-    </div>
-<!-- BEGIN VALIDATION FORM WIZARD -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body ">
-                <div id="rootwizard2" class="form-wizard form-wizard-horizontal">
-                    <!--form class="form floating-label form-validation" role="form" novalidate="novalidate"-->
+    <div class="card card-bordered style-primary" style="margin-top: 10px;margin-left: 1%;width: 98%;">
+        <div class="card-head">
+            <header><i class="fa fa-fw fa-file-excel-o "></i> Importar planillas en formato Excel</header>
+        </div><!--end .card-head -->
+        <div class="card-body style-default-bright" style="display: block;">
+            <!-- BEGIN VALIDATION FORM WIZARD -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="rootwizard2" class="form-wizard form-wizard-horizontal" style="width: 100%">
+                        <!--form class="form floating-label form-validation" role="form" novalidate="novalidate"-->
                         <div class="form-wizard-nav">
                             <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
                             <ul class="nav nav-justified">
@@ -39,17 +29,14 @@
                                 <br><br>
                                 <div class="col-lg-offset-2 col-md-8">
                                     <div class="card">
-                                        <div class="card-head style-primary">
-                                            <header>Drag and drop uploader</header>
+                                        <div class="card-head style-primary" style="color: #f8f8f8">
+                                            <header>SUBIR PLANILLAS</header>
                                         </div>
                                         <div class="card-body no-padding">
-
-
-
-
-
-
-                                            <form action="{{ URL::to('importExcel') }}" class="dropzone" id="my-awesome-dropzone" method="POST" enctype="multipart/form-data">
+                                            <div class="alert alert-info" style="width: 100%;margin-bottom: 0%;background: #b2dfdb;color: #757575" > <div class="col-3">Para subir los datos es necesario que se cumpla la estructura de la plantilla, <strong>por favor descargue la plantilla.</strong></div>
+                                                <div class="col-3" align="center"><a href="/Documentos/plantilla.xlsx"><button class="btn ink-reaction btn-flat btn-primary" >Descargar Plantilla de Datos</button></a></div>
+                                            </div>
+                                            <form action="{{ URL::to('importExcel') }}" class="dropzone" id="my-awesome-dropzone" method="POST" enctype="multipart/form-data" style="margin-top: -20px">
                                                 {{ csrf_field() }}
                                                 <div class="dz-message">
                                                     <h3>Arrastra el archivo excel aqui, o haz click para subir el archivo.</h3>
@@ -64,11 +51,9 @@
                             </div><!--end #step1 -->
                             <div class="tab-pane" id="step2">
                                 <br/><br/>
-                                <div class="container">
-                                    <table id="task" class="table table-hover table-condensed">
+                                    <table id="task" class="table table-hover" style="width: 99%;font-size: smaller;">
                                         <thead>
                                         <tr>
-
                                             <th>ID</th>
                                             <th>Documento</th>
                                             <th>paterno</th>
@@ -80,33 +65,10 @@
                                             <th>mes</th>
                                             <th>admn</th>
                                             <th>acad</th>
-
+                                            <th>Emparejado</th>
                                         </tr>
                                         </thead>
                                     </table>
-                                </div>
-                                <script type="text/javascript">
-                                    $(document).ready(function() {
-                                        oTable = $('#task').DataTable({
-                                            "processing": true,
-                                            "serverSide": true,
-                                            "ajax": "{{ route('datatable.preview') }}",
-                                            "columns": [
-                                                {data: 'id', name: 'id'},
-                                                {data: 'documento', name: 'documento'},
-                                                {data: 'paterno', name: 'paterno'},
-                                                {data: 'materno', name: 'materno'},
-                                                {data: 'ap_casada', name: 'ap_casada'},
-                                                {data: 'nombres', name: 'nombres'},
-                                                {data: 'nombre_completo', name: 'nombre_completo'},
-                                                {data: 'gestion', name: 'gestion'},
-                                                {data: 'mes', name: 'mes'},
-                                                {data: 'admn', name: 'admn'},
-                                                {data: 'acad', name: 'acad'}
-                                            ]
-                                        });
-                                    });
-                                </script>
                             </div><!--end #step2 -->
                             <div class="tab-pane" id="step3">
                                 <br/><br/>
@@ -143,23 +105,15 @@
                                 </div>
                             </div><!--end #step4 -->
                         </div><!--end .tab-content -->
-                        <ul class="pager wizard">
-                            <li class="previous first"><a class="btn-raised" href="javascript:void(0);">First</a></li>
-                            <li class="previous"><a class="btn-raised" href="javascript:void(0);">Previous</a></li>
-                            <li class="next last"><a class="btn-raised" href="javascript:void(0);">Last</a></li>
-                            <li class="next"><a class="btn-raised" href="javascript:void(0);">Next</a></li>
-                        </ul>
-                    <!--/form-->
-                </div><!--end #rootwizard -->
-            </div><!--end .card-body -->
-        </div><!--end .card -->
-
-    </div><!--end .col -->
-</div><!--end .row -->
-<!-- END VALIDATION FORM WIZARD -->
+                        <!--/form-->
+                    </div><!--end #rootwizard -->
+                </div><!--end .col -->
+            </div><!--end .row -->
+            <!-- END VALIDATION FORM WIZARD -->
+        </div><!--end .card-body -->
+    </div>
 <script type="text/javascript">
     Dropzone.options.myAwesomeDropzone = {
-
         success: function(){
             oTable.ajax.reload(null,false);
             $('#paso2').click();
@@ -170,12 +124,43 @@
             this.on("addedfile", function(file) { alert("Added file."); });
         }*/
     };
-
     rootwizard2
-
 </script>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            oTable = $('#task').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{ route('datatable.preview') }}",
+                "columns": [
+                    {data: 'id', name: 'id'},
+                    {data: 'documento', name: 'documento'},
+                    {data: 'paterno', name: 'paterno'},
+                    {data: 'materno', name: 'materno'},
+                    {data: 'ap_casada', name: 'ap_casada'},
+                    {data: 'nombres', name: 'nombres'},
+                    {data: 'nombre_completo', name: 'nombre_completo'},
+                    {data: 'gestion', name: 'gestion'},
+                    {data: 'mes', name: 'mes'},
+                    {data: 'admn', name: 'admn'},
+                    {data: 'acad', name: 'acad'},
+                    {data: 'matched', name: 'matched',sClass: "hide_column"}
 
+                ],
+                "rowCallback": function( row, data, index ) {
+                    if ( data['matched'] == '1' )
+                    {
+                        $('td', row).css('background-color', '#ccff90');
+                    }
+                    else
+                    {
+                        $('td', row).css('background-color', '#ff5252').css('color','#f8f8f8');
+                    }
+                }
+            });
+        });
+    </script>
 
 
 @endsection

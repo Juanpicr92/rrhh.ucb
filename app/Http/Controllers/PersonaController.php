@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Persona;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 class PersonaController extends Controller
 {
     /**
@@ -43,12 +46,36 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+	public function store()
+	{
+		// validate
+		// read more on validation at http://laravel.com/docs/validation
+		$rules = array(
+			'name'       => 'required',
+		);
+		$validator = Validator::make(Input::all(), $rules);
+		// process the login
+		if ($validator->fails()) {
+			return Redirect::to('persona/index')
+			               ->withErrors($validator);
+		} else {
+			// store
+			$nerd = new Persona();
+			$nerd->nombres = Input::get('name');
+			$nerd->id = '1234';
+			$birth = Input::get('birthDate');
+			$parts = explode('/',$birth);
+			$date = $parts[2] . '-' . $parts[0] . '-' . $parts[1];
+			$nerd->fechanacimiento =$date;
+			$nerd->save();
+			// redirect
+			Session::flash('message', 'Successfully created nerd!');
+			return Redirect::to('persona');
+		}
+	}
 
-    /**
+
+	/**
      * Display the specified resource.
      *
      * @param  int  $id

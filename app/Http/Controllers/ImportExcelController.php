@@ -1,6 +1,8 @@
 <?php
 
+
 namespace App\Http\Controllers;
+ini_set('max_execution_time',600);
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -88,7 +90,7 @@ class ImportExcelController extends Controller
 
                     DB::table('aux_excel')->insert($insert);
 
-                    dd('Insert Record successfully.');
+                    $result = DB::select("call matchExcel");
 
                 }
 

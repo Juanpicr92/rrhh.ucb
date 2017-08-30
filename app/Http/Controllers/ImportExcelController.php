@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 ini_set('max_execution_time',600);
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 
 use App\aux_excel;
@@ -20,7 +22,6 @@ class ImportExcelController extends Controller
 {
     //
     public function importExport()
-
     {
 
         return view('importExport');
@@ -28,7 +29,6 @@ class ImportExcelController extends Controller
     }
 
     public function downloadExcel($type)
-
     {
 
         $data = Item::get()->toArray();

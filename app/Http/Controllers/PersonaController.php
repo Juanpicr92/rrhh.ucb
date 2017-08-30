@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use DB;
 class PersonaController extends Controller
 {
     /**
@@ -118,5 +119,22 @@ class PersonaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+
+    public function Ajax_Jaro($id_excel){
+        $result = DB::select("call similitud(".$id_excel.")");
+        return response()->json($result);
+    }
+
+    public function correctPerson(){
+        $documento = Input::get('documento');
+        $idExcel = Input::get('id_excel');
+        DB:table('aux_excel')
+            ->where('id',$idExcel)
+            ->update('documento',$documento);
+
     }
 }

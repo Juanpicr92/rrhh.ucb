@@ -10,6 +10,9 @@ Route::get('importExport', 'ImportExcelController@importExport')->name('importEx
 Route::get('downloadExcel/{type}', 'ImportExcelController@downloadExcel');
 
 Route::post('importExcel', 'ImportExcelController@importExcel');
+Route::post('api/jaro/{id_excel}', 'PersonaController@Ajax_Jaro');
+Route::post('api/correctperson', 'PersonaController@correctPerson');
+
 
 
 Auth::routes();

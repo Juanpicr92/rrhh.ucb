@@ -132,9 +132,28 @@ class PersonaController extends Controller
     public function correctPerson(){
         $documento = Input::get('documento');
         $idExcel = Input::get('id_excel');
-        DB:table('aux_excel')
-            ->where('id',$idExcel)
-            ->update('documento',$documento);
+
+        if ($documento=='NUEVO'){
+            $personaexcel = $query = DB::table('aux_excel')
+                                            ->select('*')
+                                            ->where('id',$idExcel)->first();
+            $personanueva = new Persona;
+            $personanueva->documento = $personaexcel->documento;
+            $personanueva->paterno = $personaexcel->paterno;
+            $personanueva->materno = $personaexcel->materno;
+            $personanueva->nombres = $personaexcel->nombres;
+            $personanueva->nombre_completo = $personaexcel->nombre_completo;
+            $personanueva->ap_casada = $personaexcel->ap_casada;
+            $personanueva->save();
+
+        }
+        else
+        {
+            DB:table('aux_excel')
+                ->where('id',$idExcel)
+                ->update('documento',$documento);
+        }
+
 
     }
 }

@@ -102,4 +102,22 @@ class ImportExcelController extends Controller
         return back();
 
     }
+
+    public function setGestionMes(Request $request){
+        $mes = $request->mes;
+        $gestion = $request->gestion;
+        DB::table('aux_excel')
+            ->update(['mes'=>$mes, 'gestion'=>$gestion]);
+        return response()->json('{info: "success "}');
+    }
+
+
+    public function verificarmatched( Request $request){
+        $result = DB::table('aux_excel')->where('matched', '0')->get();
+        $total = count($result);
+        if($total>0) {
+            return response()->json('{info: "fail"}');
+        }
+        else return response()->json('{info: "success"}');
+    }
 }

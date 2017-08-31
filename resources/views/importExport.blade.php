@@ -49,9 +49,9 @@
                             <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
                             <ul class="nav nav-justified">
                                 <li class="active"><a href="#step1" data-toggle="tab"><span class="step">1</span> <span class="title">Seleccionar Archivo</span></a></li>
-                                <li><a id="paso2" href="#step2" data-toggle="tab"><span class="step">2</span> <span class="title">ACCOUNT</span></a></li>
-                                <li><a href="#step3" data-toggle="tab"><span class="step">3</span> <span class="title">SETTINGS</span></a></li>
-                                <li><a href="#step4" data-toggle="tab"><span class="step">4</span> <span class="title">CONFIRM</span></a></li>
+                                <li><a id="paso2" href="#step2" data-toggle="tab"><span class="step">2</span> <span class="title">Verificar Datos</span></a></li>
+                                <li><a id="paso3" href="#step3" data-toggle="tab"><span class="step">3</span> <span class="title">Configuracion</span></a></li>
+                                <li><a id="paso4" href="#step4" data-toggle="tab"><span class="step">4</span> <span class="title">Confirmacion</span></a></li>
                             </ul>
                         </div><!--end .form-wizard-nav -->
                         <div class="tab-content clearfix">
@@ -104,36 +104,48 @@
                             <div class="tab-pane" id="step3">
                                 <br/><br/>
                                 <div class="form-group">
-                                    <input type="text" name="url2" id="url2" class="form-control" data-rule-url="true" required="">
-                                    <label for="url2" class="control-label">URL</label>
-                                    <p class="help-block">Starts with http:// </p>
+                                    <div class="form-group">
+                                        <form id="gestionmes">
+                                        {{ csrf_field() }}
+                                        <label for="mes">Mes</label>
+                                        <select id="mes" name="mes" class="form-control">
+                                            <option value="">&nbsp;</option>
+                                            <option value="1">Enero</option>
+                                            <option value="2">Febrero</option>
+                                            <option value="3">Marzo</option>
+                                            <option value="4">Abril</option>
+                                            <option value="5">Mayo</option>
+                                            <option value="6">Junio</option>
+                                            <option value="7">Julio</option>
+                                            <option value="8">Agosto</option>
+                                            <option value="9">Septiembre</option>
+                                            <option value="10">Octubre</option>
+                                            <option value="11">Noviembre</option>
+                                            <option value="12">Diciembre</option>
+                                        </select>
+
+                                        <p class="help-block">Seleccione un mes.</p>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" name="rangelength2" id="rangelength2" class="form-control" data-rule-rangelength="[5, 10]" required="">
-                                    <label for="rangelength2" class="control-label">Range restriction</label>
-                                    <p class="help-block">Between 5 and 10 </p>
+                                <div class="form-group floating-label">
+                                    <label for="gestion" class="control-label">Gestion</label>
+                                    <input type="number" name="gestion" id="gestion" class="form-control" data-rule-rangelength="[1800, 2017]" max="2017" min="1900" required="">
+
+                                    <p class="help-block">Gestion de la planilla.</p>
                                 </div>
+                                <br>
+
+                                </form>
+                                <button class="btn btn-info" onclick="setGestionMes()" style="float: right">Aceptar</button>
                             </div><!--end #step3 -->
                             <div class="tab-pane" id="step4">
                                 <br/><br/>
                                 <div class="form-group">
-                                    <div class="form-group">
-                                        <select id="Age2" name="Age" class="form-control">
-                                            <option value="">&nbsp;</option>
-                                            <option value="30">30</option>
-                                            <option value="40">40</option>
-                                            <option value="50">50</option>
-                                            <option value="60">60</option>
-                                            <option value="70">70</option>
-                                        </select>
-                                        <label for="Age2">Age</label>
-                                        <p class="help-block">This is supporting text for this field.</p>
+                                    <div class="form-group" align="center">
+                                        <button class="btn" id="fin" name="fin"> Finalizar</button>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <textarea name="textarea1" id="textarea1" class="form-control" rows="3"></textarea>
-                                    <label>Textarea</label>
-                                </div>
+
                             </div><!--end #step4 -->
                         </div><!--end .tab-content -->
                         <!--/form-->
@@ -160,6 +172,24 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $.ajax({
+
+                type: "POST",
+                url: 'api/verificarmatched',
+                data: {},
+                success: function( response ) {
+                    console.log(response);
+                    if(response.info == 'success')
+                    $('#fin').addClass('btn-success');
+                    else {
+                        $('#fin').addClass('btn-danger');
+                        $('#fin').attr("disabled", true);
+                    }
+
+                }
+            });
+
+
             oTable = $('#task').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -219,6 +249,27 @@
                 });
             });
         });
+    </script>
+
+    <script type="text/javascript">
+        function setGestionMes() {
+            console.log('gestionmes');
+            //var gestion = document.getElementById('gestion').value;
+            //var mes = document.getElementById('mes').value;
+            //var _token = document.getElementById('_token').value;
+
+            $.ajax({
+
+                type: "POST",
+                url: 'importExport/setGestionMes',
+                data: $('#gestionmes').serialize(),
+                success: function( response ) {
+                    console.log(response);
+                    $('#paso4').click();
+                }
+            });
+
+        }
     </script>
 
 

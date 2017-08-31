@@ -27,7 +27,7 @@ class PersonaController extends Controller
 		$persona = Persona::select('*');
 
 		return Datatables::of($persona)->addColumn('action', function ($persona) {
-			return '<a href="#edit-'.$persona->documento.'" class="btn btn-icon-toggle" style="background: #0aa89e"><i class="fa fa-pencil" style="color: white" ></i></a>';
+			return '<a href="#edit-'.$persona->documento.'" class="btn btn-icon-toggle" style="background: #ffc107"><i class="fa fa-pencil" style="color: white" ></i></a>';
 		})->make(true);
 	}
 

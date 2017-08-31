@@ -64,6 +64,9 @@
     <script src="{{ asset('js/libs/dropzone/dropzone.min.js') }}"></script>
 
 
+
+
+
     <!-- END JAVASCRIPT -->
 
 </head>

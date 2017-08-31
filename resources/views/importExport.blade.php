@@ -5,6 +5,36 @@
         .hide_column{display: none}
     </style>
 
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content card" style="padding: 30px">
+                <div class="row" id="nombre_excel">
+
+                </div>
+                <div class="col-md-12 form" role="form">
+                    {!! Form::open(['action'=>'PersonaController@correctPerson','files'=>true, 'method'=>'POST']) !!}
+                    <div class="row">
+                        <input type="hidden" class="form-group" id="id_excel" name="id_excel" value="">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Posibles personas</label>
+                            <div class="col-sm-9">
+                                <div class="radio radio-styled" id="listado_doc">
+                                </div>
+                            </div><!--end .col -->
+                        </div><!--end .form-group -->
+                    </div>
+				    <?php  ?>
+                    {!! Form::submit('Corregir',['class'=>'btn btn-primary']) !!}
+				    <?php ?>
+                    {!! Form::close() !!}
+                    <button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-dismiss="modal" style="background: #0aa89e;color: #FFFFFF;position:absolute;right:20px;bottom:-55px"><i class="md md-close"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="card card-bordered style-primary" style="margin-top: 10px;margin-left: 1%;width: 98%;">
         <div class="card-head">
             <header><i class="fa fa-fw fa-file-excel-o "></i> Importar planillas en formato Excel</header>
@@ -66,6 +96,7 @@
                                             <th>admn</th>
                                             <th>acad</th>
                                             <th>Emparejado</th>
+                                            <th>Acciones</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -134,18 +165,19 @@
                 "serverSide": true,
                 "ajax": "{{ route('datatable.preview') }}",
                 "columns": [
-                    {data: 'id', name: 'id'},
-                    {data: 'documento', name: 'documento'},
-                    {data: 'paterno', name: 'paterno'},
-                    {data: 'materno', name: 'materno'},
-                    {data: 'ap_casada', name: 'ap_casada'},
-                    {data: 'nombres', name: 'nombres'},
-                    {data: 'nombre_completo', name: 'nombre_completo'},
+                    {data: 'id', name: 'id',orderable: false, searchable: false},
+                    {data: 'documento', name: 'documento',orderable: false, searchable: false},
+                    {data: 'paterno', name: 'paterno',orderable: false, searchable: false},
+                    {data: 'materno', name: 'materno',orderable: false, searchable: false},
+                    {data: 'ap_casada', name: 'ap_casada',orderable: false, searchable: false},
+                    {data: 'nombres', name: 'nombres',orderable: false, searchable: false},
+                    {data: 'nombre_completo', name: 'nombre_completo',orderable: false, searchable: false},
                     {data: 'gestion', name: 'gestion'},
-                    {data: 'mes', name: 'mes'},
-                    {data: 'admn', name: 'admn'},
-                    {data: 'acad', name: 'acad'},
-                    {data: 'matched', name: 'matched',sClass: "hide_column"}
+                    {data: 'mes', name: 'mes',orderable: false, searchable: false},
+                    {data: 'admn', name: 'admn',orderable: false, searchable: false},
+                    {data: 'acad', name: 'acad',orderable: false, searchable: false},
+                    {data: 'matched', name: 'matched',sClass: "hide_column"},
+                    {data: 'action', name: 'action', orderable: false, searchable: false,sClass: "hide_action"}
 
                 ],
                 "rowCallback": function( row, data, index ) {
@@ -157,7 +189,34 @@
                     {
                         $('td', row).css('background-color', '#ff5252').css('color','#f8f8f8');
                     }
-                }
+                },
+                "order": [[ 11, "asc" ]]
+
+            });
+
+            $('#task tbody').on('click', 'tr', function () {
+                var table = $('#task').DataTable();
+                var rows = table.row(this).data();
+                var id=rows['id']
+                $('#myModal').modal('show');
+                $("#id_excel").val(id);
+                $( "#listado_doc" ).empty();
+                $( "#nombre_excel" ).empty();
+                $( "#nombre_excel" ).append('<h2>'+rows['nombre_completo']+'</h2>');
+                $( "#listado_doc" ).append('<div class="radio radio-styled" id="listado_doc"> <label> <input type="radio" name="documento" value="NUEVO" checked=""> <span>Nueva persona</span> </label> </div>');
+                console.log(id);
+                $.ajax({
+                    type: "POST",
+                    url: '/api/jaro/'+id,
+                    data: {},
+                    success: function( response ) {
+                        console.log(response);
+                        $.each(response, function(index) {
+                            $( "#listado_doc" ).append('<div class="radio radio-styled" id="listado_doc"> <label> <input type="radio" name="documento" value="'+response[index].documento+'" checked=""> <span>'+response[index].paterno+' '+response[index].materno+' '+response[index].nombres+'</span> </label> </div>');
+                            console.log(response[index].documento);
+                        });
+                    }
+                });
             });
         });
     </script>

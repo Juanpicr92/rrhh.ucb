@@ -149,11 +149,11 @@ class PersonaController extends Controller
         }
         else
         {
-            DB:table('aux_excel')
+            DB::table('aux_excel')
                 ->where('id',$idExcel)
-                ->update('documento',$documento);
+                ->update(['documento'=>$documento, 'matched'=>1]);
         }
-
+	    return Redirect::to('importExport/#step2');
 
     }
 }

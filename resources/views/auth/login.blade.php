@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <br/>
-                        <span class="text-lg text-bold text-primary">MIGAS</span>
+                        <span class="text-lg text-bold text-primary">UCB</span>
                         <br/><br/>
                         <form class="form floating-label"  role="form" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}

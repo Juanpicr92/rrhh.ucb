@@ -6,7 +6,7 @@
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content card" style="padding: 30px">
-				<h2>Registro de Restaurantes</h2>
+				<h2>Registro de Personas</h2>
 				<div class="col-md-12 form" role="form">
 					{!! Form::open(['action'=>'PersonaController@store','files'=>true, 'method'=>'POST']) !!}
 					<div class="form-group floating-label {{ $errors->has('paterno') ? 'has-error' : ''}}">
@@ -37,7 +37,7 @@
 					{!! Form::submit('Registrar',['class'=>'btn btn-primary']) !!}
 					<?php ?>
 					{!! Form::close() !!}
-					<button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-dismiss="modal" style="background: #0aa89e;color: #FFFFFF;position:absolute;right:20px;bottom:-55px"><i class="md md-close"></i></button>
+					<button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-dismiss="modal" style="background: #ffc107;color: #FFFFFF;position:absolute;right:20px;bottom:-55px"><i class="md md-close"></i></button>
 				</div>
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 				</tr>
 				</thead>
 			</table>
-				<button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-toggle="modal" style="background: #0aa89e;color: #FFFFFF;position:absolute;top:33px; left:240px;" data-target="#myModal"><i class="md md-add"></i></button>
+				<button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-toggle="modal" style="background: #ffc107;color: #FFFFFF;position:absolute;top:33px; left:240px;" data-target="#myModal"><i class="md md-add"></i></button>
 			</div><!--end .section-body -->
 	</section>
 

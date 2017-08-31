@@ -21,18 +21,18 @@
 
     <!-- BEGIN STYLESHEETS -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
-    <link href="{{ asset('css/theme-default/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/theme-default/materialadmin.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/theme-default/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/theme-default/material-design-iconic-font.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/theme-default/libs/DataTables/jquery.dataTables.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/theme-default/libs/DataTables/extensions/dataTables.colVis.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/theme-default/libs/wizard/wizard.css?1425466601') }}" rel="stylesheet" type='text/css'>
-    <link href="{{ asset('css/theme-default/libs/dropzone/dropzone-theme.css?1424887864') }}" rel="stylesheet" type='text/css'>
+    <link href="{{ asset('css/theme-1/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme-1/materialadmin.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme-1/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme-1/material-design-iconic-font.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme-1/libs/DataTables/jquery.dataTables.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme-1/libs/DataTables/extensions/dataTables.colVis.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme-1/libs/DataTables/extensions/dataTables.tableTools.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme-1/libs/dropzone/dropzone-theme.css') }}" rel="stylesheet" type='text/css'>
+    <link href="{{ asset('css/theme-1/libs/wizard/wizard.css') }}" rel="stylesheet" type='text/css'>
+    <link href="{{ asset('css/theme-1/libs/bootstrap-datepicker/datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/loading-bar.css') }}" rel="stylesheet">
 
-
-    <link href="{{ asset('css/theme-default/libs/bootstrap-datepicker/datepicker3.css') }}" rel="stylesheet">
 
     <!-- END STYLESHEETS -->
 
@@ -62,6 +62,7 @@
     <script src="{{ asset('js/libs/DataTables/extensions/ColVis/js/dataTables.colVis.min.js') }}"></script>
     <script src="{{ asset('js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script>
     <script src="{{ asset('js/libs/dropzone/dropzone.min.js') }}"></script>
+    <script src="{{ asset('js/loading-bar.js') }}"></script>
 
 
 

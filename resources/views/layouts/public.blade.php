@@ -18,10 +18,10 @@
     </script>
     <!-- BEGIN STYLESHEETS -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
-    <link type="text/css" rel="stylesheet" href="css/theme-default/bootstrap.css" />
-    <link type="text/css" rel="stylesheet" href="css/theme-default/materialadmin.css" />
-    <link type="text/css" rel="stylesheet" href="css/theme-default/font-awesome.min.css" />
-    <link type="text/css" rel="stylesheet" href="css/theme-default/material-design-iconic-font.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/theme-1/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="css/theme-1/materialadmin.css" />
+    <link type="text/css" rel="stylesheet" href="css/theme-1/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/theme-1/material-design-iconic-font.min.css" />
     <!-- END STYLESHEETS -->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,7 +31,7 @@
     <![endif]-->
 
 </head>
-<body class="menubar-hoverable header-fixed menubar-pin ">
+<body class="menubar-hoverable header-fixed menubar-pin body-public">
 
     <!-- BEGIN CONTENT-->
     <div id="content">

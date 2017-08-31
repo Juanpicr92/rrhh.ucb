@@ -7,7 +7,7 @@
                 <li class="header-nav-brand" >
                     <div class="brand-holder">
                         <a href="#">
-                            <span class="text-lg text-bold text-primary">UCB</span>
+                            <span class="text-lg text-bold text-primary"><img src="{{ asset('logo/logo_ucb_med.gif') }}" alt="" />   UCB</span>
                         </a>
                     </div>
                 </li>

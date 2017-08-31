@@ -4,7 +4,6 @@
     <style>
         .hide_column{display: none}
     </style>
-
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -24,11 +23,12 @@
                             </div><!--end .col -->
                         </div><!--end .form-group -->
                     </div>
+                    <div id="loader"><img src="images/ajax-loader.gif"></div>
 				    <?php  ?>
-                    {!! Form::submit('Corregir',['class'=>'btn btn-primary']) !!}
+                    {!! Form::submit('Corregir',['class'=>'btn btn-primary','id'=>'corregir']) !!}
 				    <?php ?>
                     {!! Form::close() !!}
-                    <button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-dismiss="modal" style="background: #0aa89e;color: #FFFFFF;position:absolute;right:20px;bottom:-55px"><i class="md md-close"></i></button>
+                    <button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-dismiss="modal" style="background: #ffc107;color: #FFFFFF;position:absolute;right:20px;bottom:-55px"><i class="md md-close"></i></button>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
                                             <header>SUBIR PLANILLAS</header>
                                         </div>
                                         <div class="card-body no-padding">
-                                            <div class="alert alert-info" style="width: 100%;margin-bottom: 0%;background: #b2dfdb;color: #757575" > <div class="col-3">Para subir los datos es necesario que se cumpla la estructura de la plantilla, <strong>por favor descargue la plantilla.</strong></div>
+                                            <div class="alert alert-info" style="width: 100%;margin-bottom: 0%;background: #bbdefb;color: #757575" > <div class="col-3">Para subir los datos es necesario que se cumpla la estructura de la plantilla, <strong>por favor descargue la plantilla.</strong></div>
                                                 <div class="col-3" align="center"><a href="/Documentos/plantilla.xlsx"><button class="btn ink-reaction btn-flat btn-primary" >Descargar Plantilla de Datos</button></a></div>
                                             </div>
                                             <form action="{{ URL::to('importExcel') }}" class="dropzone" id="my-awesome-dropzone" method="POST" enctype="multipart/form-data" style="margin-top: -20px">
@@ -96,7 +96,6 @@
                                             <th>admn</th>
                                             <th>acad</th>
                                             <th>Emparejado</th>
-                                            <th>Acciones</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -154,6 +153,8 @@
             </div><!--end .row -->
             <!-- END VALIDATION FORM WIZARD -->
         </div><!--end .card-body -->
+
+
     </div>
 <script type="text/javascript">
     Dropzone.options.myAwesomeDropzone = {
@@ -207,8 +208,6 @@
                     {data: 'admn', name: 'admn',orderable: false, searchable: false},
                     {data: 'acad', name: 'acad',orderable: false, searchable: false},
                     {data: 'matched', name: 'matched',sClass: "hide_column"},
-                    {data: 'action', name: 'action', orderable: false, searchable: false,sClass: "hide_action"}
-
                 ],
                 "rowCallback": function( row, data, index ) {
                     if ( data['matched'] == '1' )
@@ -234,16 +233,22 @@
                 $( "#nombre_excel" ).empty();
                 $( "#nombre_excel" ).append('<h2>'+rows['nombre_completo']+'</h2>');
                 $( "#listado_doc" ).append('<div class="radio radio-styled" id="listado_doc"> <label> <input type="radio" name="documento" value="NUEVO" checked=""> <span>Nueva persona</span> </label> </div>');
-                console.log(id);
                 $.ajax({
                     type: "POST",
                     url: '/api/jaro/'+id,
                     data: {},
+                    beforeSend: function() {
+                        $('#loader').show();
+                        $('#corregir').hide();
+                    },
+                    complete: function(){
+                        $('#loader').hide();$('#corregir').show();
+
+                    },
                     success: function( response ) {
                         console.log(response);
                         $.each(response, function(index) {
                             $( "#listado_doc" ).append('<div class="radio radio-styled" id="listado_doc"> <label> <input type="radio" name="documento" value="'+response[index].documento+'" checked=""> <span>'+response[index].paterno+' '+response[index].materno+' '+response[index].nombres+'</span> </label> </div>');
-                            console.log(response[index].documento);
                         });
                     }
                 });

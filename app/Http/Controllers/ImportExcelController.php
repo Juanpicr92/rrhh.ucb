@@ -113,14 +113,33 @@ class ImportExcelController extends Controller
         $result = DB::table('aux_excel')->where('matched', '0')->get();
         $total = count($result);
         if($total>0) {
+<<<<<<< HEAD
             return response()->json('{info: "fail "'+$total+'}');
+=======
+	        $status=FALSE;
+>>>>>>> 50694dd4c830d3190cd0dd1a1cb72aa6c3134736
         }
-        else return response()->json('{info: "success"}');
+        else {
+	        $status=TRUE;
+        }
+	    return response()->json([
+		    'info' => $status,
+	    ]);
     }
 
     public function finishExcel(){
-        DB::select("INSERT  into PLANILLAS (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel");
-        DB::select("truncate table aux_excel");
-        return response()->json('{info: "success"}');
+	    if (DB::select("INSERT  into PLANILLAS (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel") && DB::select("truncate table aux_excel"))
+	    {
+		    $status=TRUE;
+		    $message='Se importo la planilla de forma exitosa';
+	    }
+        else{
+	        $status=FALSE;
+	        $message='Ocurrió un error inesperado, inténtelo más tarde';
+        }
+	    return response()->json([
+		    'status' => $status,
+		    'message' => $message,
+	    ]);
     }
 }

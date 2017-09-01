@@ -114,8 +114,6 @@ class ImportExcelController extends Controller
         $total = count($result);
         if($total>0) {
 
-            return response()->json('{info: "fail "'+$total+'}');
-
 	        $status=FALSE;
 
         }

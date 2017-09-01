@@ -100,9 +100,8 @@
                             </div><!--end #step2 -->
                             <div class="tab-pane" id="step3">
                                 <br/><br/>
-                                <div class="form-group">
+                                <form id="gestionmes" class="form-validate">
                                     <div class="form-group">
-                                        <form id="gestionmes" class="form-validate">
                                         {{ csrf_field() }}
                                         <label for="mes">Mes</label>
                                         <select id="mes" name="mes" class="form-control">
@@ -123,7 +122,6 @@
 
                                         <p class="help-block">Seleccione un mes.</p>
                                     </div>
-                                </div>
                                 <div class="form-group floating-label">
                                     <label for="gestion" class="control-label">Gestion</label>
                                     <input type="number" name="gestion" id="gestion" class="form-control" data-rule-rangelength="[1800, 2017]" max="2017" min="1900" required="">
@@ -142,9 +140,8 @@
                                 </select>
 
                                 <p class="help-block">Seleccione una Regional.</p>
-                            </div>
                                 </form>
-                            <br>
+                                <br>
                                 <button class="btn btn-info" onclick="setGestionMes()" style="float: right">Aceptar</button>
                             </div><!--end #step3 -->
                             <div class="tab-pane" id="step4">
@@ -154,7 +151,6 @@
                                         <button class="btn" id="fin" name="fin"> Finalizar</button>
                                     </div>
                                 </div>
-
                             </div><!--end #step4 -->
                         </div><!--end .tab-content -->
                         <!--/form-->

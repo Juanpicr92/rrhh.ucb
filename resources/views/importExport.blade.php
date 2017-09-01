@@ -23,7 +23,7 @@
                             </div><!--end .col -->
                         </div><!--end .form-group -->
                     </div>
-                    <div id="loader"><img src="images/ajax-loader.gif"></div>
+                    <div id="loader"><img src="{{asset('images/ajax-loader.gif')}}"></div>
 				    <?php  ?>
                     {!! Form::submit('Corregir',['class'=>'btn btn-primary','id'=>'corregir']) !!}
 				    <?php ?>

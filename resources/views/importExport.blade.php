@@ -148,7 +148,7 @@
                                 <br/><br/>
                                 <div class="form-group">
                                     <div class="form-group" align="center">
-                                        <button class="btn" id="fin" name="fin"> Finalizar</button>
+                                        <button class="btn" id="fin" name="fin" onclick="finish()"> Finalizar</button>
                                     </div>
                                 </div>
                             </div><!--end #step4 -->
@@ -301,6 +301,28 @@
         }
     </script>
 
+    <script type="text/javascript">
+        function finish() {
+            $.ajax({
+                type: "POST",
+                url: '/api/FinishExcel',
+                data: {},
+                success: function( response ) {
+                    console.log(response.status);
+                    if (response.status === true){
+                        console.log(response.message);
+                        $('#myModal').modal('hide');
+                        $('#modal-success').modal('toggle');
+                        $('#mensaje-exito').append('<h2>'+response.message+'</h2>')
+                        $('#paso1').click();
+                    }else {
+                        $('#modal-error').modal('toggle');
+                        $('#mensaje-error').append('<h2>'+response.message+'</h2>')
+                    }
+                }
+            });
+        }
+    </script>
 
 
 

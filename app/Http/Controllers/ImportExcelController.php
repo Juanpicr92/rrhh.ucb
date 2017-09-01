@@ -75,8 +75,6 @@ class ImportExcelController extends Controller
                                     'materno' => $value->materno,
                                     'ap_casada' => $value->ap_casada,
                                     'nombres' => $value->materno,
-                                    'mes' => $value->mes,
-                                    'gestion' => $value->gestion,
                                     'admn' => $value->admn,
                                     'acad' => $value->acad
                                 ];
@@ -115,7 +113,7 @@ class ImportExcelController extends Controller
         $result = DB::table('aux_excel')->where('matched', '0')->get();
         $total = count($result);
         if($total>0) {
-            return response()->json('{info: "fail"}');
+            return response()->json('{info: "fail "'+$total+'}');
         }
         else return response()->json('{info: "success"}');
     }

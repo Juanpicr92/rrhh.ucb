@@ -144,17 +144,32 @@ class PersonaController extends Controller
             $personanueva->nombres = $personaexcel->nombres;
             $personanueva->nombre_completo = $personaexcel->nombre_completo;
             $personanueva->ap_casada = $personaexcel->ap_casada;
-            $personanueva->save();
+            if($personanueva->save()){
+            	$status=TRUE;
+            	$message='Correccion Exitosa';
+            }
+            else{
+	            $status=FALSE;
+	            $message='Ocurrió un error inesperado, inténtelo más tarde';
+            }
 
         }
         else
         {
-            DB::table('aux_excel')
-                ->where('id',$idExcel)
-                ->update(['documento'=>$documento, 'matched'=>1]);
-        }
-	    return Redirect::to('importExport/#step2');
 
+	        if (DB::table('aux_excel')->where('id',$idExcel)->update(['documento'=>$documento, 'matched'=>1])){
+		        $status=TRUE;
+		        $message='Correccion Exitosa';
+	        }
+	        else{
+		        $status=FALSE;
+		        $message='Ocurrió un error inesperado, inténtelo más tarde';
+	        }
+        }
+	    return response()->json([
+		    'status' => $status,
+		    'message' => $message,
+	    ]);
     }
 
 }

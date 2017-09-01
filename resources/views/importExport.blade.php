@@ -12,7 +12,7 @@
 
                 </div>
                 <div class="col-md-12 form" role="form">
-                    {!! Form::open(['action'=>'PersonaController@correctPerson','files'=>true, 'method'=>'POST']) !!}
+                    {!! Form::open(['action'=>'PersonaController@correctPerson','files'=>true, 'method'=>'POST', 'id'=>'correct_form']) !!}
                     <div class="row">
                         <input type="hidden" class="form-group" id="id_excel" name="id_excel" value="">
                         <div class="form-group">
@@ -24,15 +24,15 @@
                         </div><!--end .form-group -->
                     </div>
                     <div id="loader"><img src="{{asset('images/ajax-loader.gif')}}"></div>
-				    <?php  ?>
-                    {!! Form::submit('Corregir',['class'=>'btn btn-primary','id'=>'corregir']) !!}
-				    <?php ?>
                     {!! Form::close() !!}
+                    <button class="btn btn-info" onclick="corregir()" id="corregir" style="float: left">Aceptar</button>
                     <button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-dismiss="modal" style="background: #ffc107;color: #FFFFFF;position:absolute;right:20px;bottom:-55px"><i class="md md-close"></i></button>
                 </div>
             </div>
         </div>
     </div>
+
+
 
 
     <div class="card card-bordered style-primary" style="margin-top: 10px;margin-left: 1%;width: 98%;">
@@ -91,8 +91,6 @@
                                             <th>ap_casada</th>
                                             <th>nombres</th>
                                             <th>nombre_completo</th>
-                                            <th>gestion</th>
-                                            <th>mes</th>
                                             <th>admn</th>
                                             <th>acad</th>
                                             <th>Emparejado</th>
@@ -102,12 +100,10 @@
                             </div><!--end #step2 -->
                             <div class="tab-pane" id="step3">
                                 <br/><br/>
-                                <form id="gestionmes">
-                                    {{ csrf_field() }}
                                 <div class="form-group">
-
                                     <div class="form-group">
-
+                                        <form id="gestionmes" class="form-validate">
+                                        {{ csrf_field() }}
                                         <label for="mes">Mes</label>
                                         <select id="mes" name="mes" class="form-control">
                                             <option value="">&nbsp;</option>
@@ -135,25 +131,6 @@
                                     <p class="help-block">Gestion de la planilla.</p>
                                 </div>
                                 <br>
-                                    <div class="form-group">
-
-                                        <div class="form-group">
-
-                                            <label for="regional">Regional</label>
-                                            <select id="regional" name="regional" class="form-control">
-                                                <option value="">&nbsp;</option>
-                                                <option value="La Paz">La Paz</option>
-                                                <option value="Santa Cruz">Santa Cruz</option>
-                                                <option value="Cochabamba">Cochabamba</option>
-                                                <option value="Tarija">Tarija</option>
-                                                <option value="EPC">EPC</option>
-                                                <option value="Nacional">Nacional</option>
-                                            </select>
-
-                                            <p class="help-block">Seleccione una Regional.</p>
-                                        </div>
-                                    </div>
-
 
                                 </form>
                                 <button class="btn btn-info" onclick="setGestionMes()" style="float: right">Aceptar</button>
@@ -162,7 +139,7 @@
                                 <br/><br/>
                                 <div class="form-group">
                                     <div class="form-group" align="center">
-                                        <button class="btn" id="fin" name="fin" onclick="finishExcelUpload()"> Finalizar</button>
+                                        <button class="btn" id="fin" name="fin"> Finalizar</button>
                                     </div>
                                 </div>
 
@@ -174,8 +151,6 @@
             </div><!--end .row -->
             <!-- END VALIDATION FORM WIZARD -->
         </div><!--end .card-body -->
-
-
     </div>
 <script type="text/javascript">
     Dropzone.options.myAwesomeDropzone = {
@@ -185,6 +160,9 @@
             //oTable.data.reload();
         },
 
+        /*init: function() {
+            this.on("addedfile", function(file) { alert("Added file."); });
+        }*/
     };
     rootwizard2
 </script>
@@ -194,7 +172,7 @@
             $.ajax({
 
                 type: "POST",
-                url: 'api/verificarmatched',
+                url: '/api/verificarmatched',
                 data: {},
                 success: function( response ) {
                     console.log(response);
@@ -221,11 +199,9 @@
                     {data: 'ap_casada', name: 'ap_casada',orderable: false, searchable: false},
                     {data: 'nombres', name: 'nombres',orderable: false, searchable: false},
                     {data: 'nombre_completo', name: 'nombre_completo',orderable: false, searchable: false},
-                    {data: 'gestion', name: 'gestion'},
-                    {data: 'mes', name: 'mes',orderable: false, searchable: false},
                     {data: 'admn', name: 'admn',orderable: false, searchable: false},
                     {data: 'acad', name: 'acad',orderable: false, searchable: false},
-                    {data: 'matched', name: 'matched',sClass: "hide_column"},
+                    {data: 'matched', name: 'matched',sClass: "hide_column"}
                 ],
                 "rowCallback": function( row, data, index ) {
                     if ( data['matched'] == '1' )
@@ -237,7 +213,7 @@
                         $('td', row).css('background-color', '#ff5252').css('color','#f8f8f8');
                     }
                 },
-                "order": [[ 11, "asc" ]]
+                "order": [[ 9, "asc" ]]
 
             });
 
@@ -277,11 +253,13 @@
     <script type="text/javascript">
         function setGestionMes() {
             console.log('gestionmes');
+            //var gestion = document.getElementById('gestion').value;
+            //var mes = document.getElementById('mes').value;
+            //var _token = document.getElementById('_token').value;
 
             $.ajax({
-
                 type: "POST",
-                url: 'importExport/setGestionMes',
+                url: '/importExport/setGestionMes',
                 data: $('#gestionmes').serialize(),
                 success: function( response ) {
                     console.log(response);
@@ -290,22 +268,32 @@
             });
 
         }
+    </script>
 
-        function finishExcelUpload() {
-            console.log('finish excel');
-
+    <script type="text/javascript">
+        function corregir() {
             $.ajax({
                 type: "POST",
-                url: 'api/FinishExcel',
-                data: {},
+                url: '/api/correctperson',
+                data: $('#correct_form').serialize(),
                 success: function( response ) {
-                    console.log(response);
-
+                    oTable.ajax.reload(null,false);
+                    console.log(response.status);
+                    if (response.status === true){
+                        console.log(response.message);
+                        $('#myModal').modal('hide');
+                        $('#modal-success').modal('toggle');
+                        $('#mensaje-exito').append('<h2>'+response.message+'</h2>')
+                    }else {
+                        $('#modal-error').modal('toggle');
+                        $('#mensaje-error').append('<h2>'+response.message+'</h2>')
+                    }
                 }
             });
-
         }
     </script>
+
+
 
 
 @endsection

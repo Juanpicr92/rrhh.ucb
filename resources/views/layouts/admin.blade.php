@@ -77,6 +77,7 @@
 <div id="base">
     <!-- BEGIN CONTENT-->
     <div id="content">
+        @include('components.messages');
         @yield('content')
     </div><!--end #content-->
     <!-- END CONTENT -->

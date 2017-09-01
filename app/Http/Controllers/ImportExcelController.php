@@ -115,9 +115,14 @@ class ImportExcelController extends Controller
         $result = DB::table('aux_excel')->where('matched', '0')->get();
         $total = count($result);
         if($total>0) {
-            return response()->json('{info: "fail"}');
+	        $status=FALSE;
         }
-        else return response()->json('{info: "success"}');
+        else {
+	        $status=TRUE;
+        }
+	    return response()->json([
+		    'info' => $status,
+	    ]);
     }
 
     public function finishExcel(){

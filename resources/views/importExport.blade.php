@@ -119,27 +119,27 @@
                                             <option value="11">Noviembre</option>
                                             <option value="12">Diciembre</option>
                                         </select>
-
                                         <p class="help-block">Seleccione un mes.</p>
                                     </div>
                                 <div class="form-group floating-label">
                                     <label for="gestion" class="control-label">Gestion</label>
                                     <input type="number" name="gestion" id="gestion" class="form-control" data-rule-rangelength="[1800, 2017]" max="2017" min="1900" required="">
-
                                     <p class="help-block">Gestion de la planilla.</p>
                                 </div>
                                 <br>
-                                <label for="regional">Regional</label>
-                                <select id="regional" name="regional" class="form-control">
-                                    <option value="">&nbsp;</option>
-                                    <option value="La Paz">La Paz</option>
-                                    <option value="Santa Cruz">Santa Cruz</option>
-                                    <option value="Cochabamba">Cochabamba</option>
-                                    <option value="EPC">EPC</option>
-                                    <option value="Nacional">Nacional</option>
-                                </select>
+                                <div class="form-group floating-label">
+                                    <label for="regional">Regional</label>
+                                    <select id="regional" name="regional" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        <option value="La Paz">La Paz</option>
+                                        <option value="Santa Cruz">Santa Cruz</option>
+                                        <option value="Cochabamba">Cochabamba</option>
+                                        <option value="EPC">EPC</option>
+                                        <option value="Nacional">Nacional</option>
+                                    </select>
+                                    <p class="help-block">Seleccione una Regional.</p>
+                                </div>
 
-                                <p class="help-block">Seleccione una Regional.</p>
                                 </form>
                                 <br>
                                 <button class="btn btn-info" onclick="setGestionMes()" style="float: right">Aceptar</button>
@@ -184,8 +184,10 @@
                 data: {},
                 success: function( response ) {
                     console.log(response);
-                    if(response.info == 'success')
-                    $('#fin').addClass('btn-success');
+                    if(response.info == true) {
+                        $('#fin').addClass('btn-success');
+                        $('#fin').removeAttr( "disabled" );
+                    }
                     else {
                         $('#fin').addClass('btn-danger');
                         $('#fin').attr("disabled", true);

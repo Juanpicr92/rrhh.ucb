@@ -102,10 +102,12 @@
                             </div><!--end #step2 -->
                             <div class="tab-pane" id="step3">
                                 <br/><br/>
+                                <form id="gestionmes">
+                                    {{ csrf_field() }}
                                 <div class="form-group">
+
                                     <div class="form-group">
-                                        <form id="gestionmes">
-                                        {{ csrf_field() }}
+
                                         <label for="mes">Mes</label>
                                         <select id="mes" name="mes" class="form-control">
                                             <option value="">&nbsp;</option>
@@ -133,6 +135,25 @@
                                     <p class="help-block">Gestion de la planilla.</p>
                                 </div>
                                 <br>
+                                    <div class="form-group">
+
+                                        <div class="form-group">
+
+                                            <label for="regional">Regional</label>
+                                            <select id="regional" name="regional" class="form-control">
+                                                <option value="">&nbsp;</option>
+                                                <option value="La Paz">La Paz</option>
+                                                <option value="Santa Cruz">Santa Cruz</option>
+                                                <option value="Cochabamba">Cochabamba</option>
+                                                <option value="Tarija">Tarija</option>
+                                                <option value="EPC">EPC</option>
+                                                <option value="Nacional">Nacional</option>
+                                            </select>
+
+                                            <p class="help-block">Seleccione una Regional.</p>
+                                        </div>
+                                    </div>
+
 
                                 </form>
                                 <button class="btn btn-info" onclick="setGestionMes()" style="float: right">Aceptar</button>
@@ -141,7 +162,7 @@
                                 <br/><br/>
                                 <div class="form-group">
                                     <div class="form-group" align="center">
-                                        <button class="btn" id="fin" name="fin"> Finalizar</button>
+                                        <button class="btn" id="fin" name="fin" onclick="finishExcelUpload()"> Finalizar</button>
                                     </div>
                                 </div>
 
@@ -164,9 +185,6 @@
             //oTable.data.reload();
         },
 
-        /*init: function() {
-            this.on("addedfile", function(file) { alert("Added file."); });
-        }*/
     };
     rootwizard2
 </script>
@@ -259,9 +277,6 @@
     <script type="text/javascript">
         function setGestionMes() {
             console.log('gestionmes');
-            //var gestion = document.getElementById('gestion').value;
-            //var mes = document.getElementById('mes').value;
-            //var _token = document.getElementById('_token').value;
 
             $.ajax({
 
@@ -271,6 +286,21 @@
                 success: function( response ) {
                     console.log(response);
                     $('#paso4').click();
+                }
+            });
+
+        }
+
+        function finishExcelUpload() {
+            console.log('finish excel');
+
+            $.ajax({
+                type: "POST",
+                url: 'api/FinishExcel',
+                data: {},
+                success: function( response ) {
+                    console.log(response);
+
                 }
             });
 

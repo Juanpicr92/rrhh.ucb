@@ -104,8 +104,9 @@ class ImportExcelController extends Controller
     public function setGestionMes(Request $request){
         $mes = $request->mes;
         $gestion = $request->gestion;
+        $regional = $request->regional;
         DB::table('aux_excel')
-            ->update(['mes'=>$mes, 'gestion'=>$gestion]);
+            ->update(['mes'=>$mes, 'gestion'=>$gestion, 'regional'=>$regional]);
         return response()->json('{info: "success "}');
     }
 
@@ -117,5 +118,10 @@ class ImportExcelController extends Controller
             return response()->json('{info: "fail"}');
         }
         else return response()->json('{info: "success"}');
+    }
+
+    public function finishExcel(){
+        DB::select("INSERT  into PLANILLAS (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel");
+        return response()->json('{info: "success"}');
     }
 }

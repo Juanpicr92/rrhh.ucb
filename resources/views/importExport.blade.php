@@ -131,8 +131,20 @@
                                     <p class="help-block">Gestion de la planilla.</p>
                                 </div>
                                 <br>
+                                <label for="regional">Regional</label>
+                                <select id="regional" name="regional" class="form-control">
+                                    <option value="">&nbsp;</option>
+                                    <option value="La Paz">La Paz</option>
+                                    <option value="Santa Cruz">Santa Cruz</option>
+                                    <option value="Cochabamba">Cochabamba</option>
+                                    <option value="EPC">EPC</option>
+                                    <option value="Nacional">Nacional</option>
+                                </select>
 
+                                <p class="help-block">Seleccione una Regional.</p>
+                            </div>
                                 </form>
+                            <br>
                                 <button class="btn btn-info" onclick="setGestionMes()" style="float: right">Aceptar</button>
                             </div><!--end #step3 -->
                             <div class="tab-pane" id="step4">

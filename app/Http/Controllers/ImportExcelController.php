@@ -126,8 +126,18 @@ class ImportExcelController extends Controller
     }
 
     public function finishExcel(){
-        DB::select("INSERT  into PLANILLAS (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel");
-        DB::select("truncate table aux_excel");
-        return response()->json('{info: "success"}');
+	    if (DB::select("INSERT  into PLANILLAS (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel") && DB::select("truncate table aux_excel"))
+	    {
+		    $status=TRUE;
+		    $message='Se importo la planilla de forma exitosa';
+	    }
+        else{
+	        $status=FALSE;
+	        $message='Ocurrió un error inesperado, inténtelo más tarde';
+        }
+	    return response()->json([
+		    'status' => $status,
+		    'message' => $message,
+	    ]);
     }
 }

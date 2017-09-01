@@ -113,11 +113,8 @@ class ImportExcelController extends Controller
         $result = DB::table('aux_excel')->where('matched', '0')->get();
         $total = count($result);
         if($total>0) {
-<<<<<<< HEAD
             return response()->json('{info: "fail "'+$total+'}');
-=======
 	        $status=FALSE;
->>>>>>> 50694dd4c830d3190cd0dd1a1cb72aa6c3134736
         }
         else {
 	        $status=TRUE;

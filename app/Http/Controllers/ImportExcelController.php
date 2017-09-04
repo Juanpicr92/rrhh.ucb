@@ -130,7 +130,7 @@ class ImportExcelController extends Controller
 	    //beginTransaction();
 
 		// Run Queries
-	    $acct = DB::insert("INSERT  into PLANILLAS (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel");
+	    $acct = DB::insert("INSERT  into contratacion_mensual (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel");
 
 		// If there's an error
 		//    or queries don't do their job,

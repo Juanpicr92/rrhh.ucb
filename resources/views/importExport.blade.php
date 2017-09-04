@@ -176,27 +176,7 @@
 </script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $.ajax({
-
-                type: "POST",
-                url: '/api/verificarmatched',
-                data: {},
-                success: function( response ) {
-                    console.log(response);
-                    if(response.info == true) {
-                        $('#fin').addClass('btn-success');
-                        $('#fin').removeAttr( "disabled" );
-                    }
-                    else {
-                        $('#fin').addClass('btn-danger');
-                        $('#fin').attr("disabled", true);
-                    }
-
-                }
-            });
-
-
+        $(document).ready(function () {
             oTable = $('#task').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -261,6 +241,26 @@
     </script>
 
     <script type="text/javascript">
+        function check_end() {
+            $.ajax({
+
+                type: "POST",
+                url: '/api/verificarmatched',
+                data: {},
+                success: function( response ) {
+                    console.log(response);
+                    if(response.info == true) {
+                        $('#fin').addClass('btn-success');
+                        $('#fin').removeAttr( "disabled" );
+                    }
+                    else {
+                        $('#fin').addClass('btn-danger');
+                        $('#fin').attr("disabled", true);
+                    }
+
+                }
+
+        })};
         function setGestionMes() {
             console.log('gestionmes');
             //var gestion = document.getElementById('gestion').value;
@@ -274,6 +274,7 @@
                 success: function( response ) {
                     console.log(response);
                     $('#paso4').click();
+                    check_end();
                 }
             });
 
@@ -308,6 +309,9 @@
     <script type="text/javascript">
         function endimport() {
             location.reload();
+        }
+        $(document).ready(function () {
+            check_end()
         }
         function finish() {
             $.ajax({

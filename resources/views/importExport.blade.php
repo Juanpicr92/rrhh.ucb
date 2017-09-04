@@ -131,11 +131,11 @@
                                     <label for="regional">Regional</label>
                                     <select id="regional" name="regional" class="form-control">
                                         <option value="">&nbsp;</option>
-                                        <option value="La Paz">La Paz</option>
-                                        <option value="Santa Cruz">Santa Cruz</option>
-                                        <option value="Cochabamba">Cochabamba</option>
+                                        <option value="LA PAZ">La Paz</option>
+                                        <option value="SANTA CRUZ">Santa Cruz</option>
+                                        <option value="COCHABAMBA">Cochabamba</option>
                                         <option value="EPC">EPC</option>
-                                        <option value="Nacional">Nacional</option>
+                                        <option value="NACIONAL">Nacional</option>
                                     </select>
                                     <p class="help-block">Seleccione una Regional.</p>
                                 </div>
@@ -293,9 +293,11 @@
                         console.log(response.message);
                         $('#myModal').modal('hide');
                         $('#modal-success').modal('toggle');
+                        $('#mensaje-exito').empty();
                         $('#mensaje-exito').append('<h2>'+response.message+'</h2>')
                     }else {
                         $('#modal-error').modal('toggle');
+                        $('#mensaje-error').empty();
                         $('#mensaje-error').append('<h2>'+response.message+'</h2>')
                     }
                 }
@@ -316,11 +318,13 @@
                     if (response.status === true){
                         $('#myModal').modal('hide');
                         $('#modal-success').modal('toggle');
-                        $('#mensaje-exito').append('<h2>'+response.message+'</h2>')
+                        $('#mensaje-exito').empty();
+                        $('#mensaje-exito').append('<h2>'+response.message+'</h2>');
                         setInterval(endimport, 2000);
                     }else {
                         $('#modal-error').modal('toggle');
-                        $('#mensaje-error').append('<h2>'+response.message+'</h2>')
+                        $('#mensaje-error').empty();
+                        $('#mensaje-error').append('<h2>'+response.message+'</h2>');
                     }
                 }
             });

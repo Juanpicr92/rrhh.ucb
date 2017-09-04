@@ -111,8 +111,8 @@ class ImportExcelController extends Controller
 
     public function verificarmatched( Request $request){
         $result = DB::table('aux_excel')->where('matched', '0')->get();
-        $total = count($result);
-        if($total>0) {
+        $payrolls = DB::table('aux_excel')->get();
+        if(count($result) || count($payrolls)===0) {
 
 	        $status=FALSE;
 
@@ -137,7 +137,7 @@ class ImportExcelController extends Controller
 		//    rollback!
 	    if( !$acct )
 	    {
-		    $status=$acct;
+		    $status=FALSE;
 		    $message='Ocurrió un error inesperado, inténtelo más tarde';
 	    	//rollbackTransaction();
 	    } else {

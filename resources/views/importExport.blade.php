@@ -48,7 +48,7 @@
                         <div class="form-wizard-nav">
                             <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
                             <ul class="nav nav-justified">
-                                <li class="active"><a href="#step1" data-toggle="tab"><span class="step">1</span> <span class="title">Seleccionar Archivo</span></a></li>
+                                <li class="active"><a id="paso1" href="#step1" data-toggle="tab"><span class="step">1</span> <span class="title">Seleccionar Archivo</span></a></li>
                                 <li><a id="paso2" href="#step2" data-toggle="tab"><span class="step">2</span> <span class="title">Verificar Datos</span></a></li>
                                 <li><a id="paso3" href="#step3" data-toggle="tab"><span class="step">3</span> <span class="title">Configuracion</span></a></li>
                                 <li><a id="paso4" href="#step4" data-toggle="tab"><span class="step">4</span> <span class="title">Confirmacion</span></a></li>
@@ -304,19 +304,20 @@
     </script>
 
     <script type="text/javascript">
+        function endimport() {
+            location.reload();
+        }
         function finish() {
             $.ajax({
                 type: "POST",
                 url: '/api/FinishExcel',
                 data: {},
                 success: function( response ) {
-                    console.log(response.status);
                     if (response.status === true){
-                        console.log(response.message);
                         $('#myModal').modal('hide');
                         $('#modal-success').modal('toggle');
                         $('#mensaje-exito').append('<h2>'+response.message+'</h2>')
-                        $('#paso1').click();
+                        setInterval(endimport, 2000);
                     }else {
                         $('#modal-error').modal('toggle');
                         $('#mensaje-error').append('<h2>'+response.message+'</h2>')
@@ -325,7 +326,5 @@
             });
         }
     </script>
-
-
 
 @endsection

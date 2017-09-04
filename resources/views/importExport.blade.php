@@ -312,7 +312,7 @@
         }
         $(document).ready(function () {
             check_end()
-        }
+        });
         function finish() {
             $.ajax({
                 type: "POST",

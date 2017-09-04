@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
-
+use DB;
 use App\aux_excel;
 use App\ImportExcel;
 
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
 
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -126,16 +126,28 @@ class ImportExcelController extends Controller
     }
 
     public function finishExcel(){
-	    if (DB::select("INSERT  into PLANILLAS (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel"))
+	    // Start transaction
+	    //beginTransaction();
+
+		// Run Queries
+	    $acct = DB::raw("INSERT  into PLANILLAS (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel");
+
+		// If there's an error
+		//    or queries don't do their job,
+		//    rollback!
+	    if( !$acct )
 	    {
+		    $status=$acct;
+		    $message='Ocurrió un error inesperado, inténtelo más tarde';
+	    	//rollbackTransaction();
+	    } else {
+		    // Else commit the queries
 		    DB::select("truncate table aux_excel");
 		    $status=TRUE;
 		    $message='Se importo la planilla de forma exitosa';
+		   // commitTransaction();
 	    }
-        else{
-	        $status=FALSE;
-	        $message='Ocurrió un error inesperado, inténtelo más tarde';
-        }
+
 	    return response()->json([
 		    'status' => $status,
 		    'message' => $message,

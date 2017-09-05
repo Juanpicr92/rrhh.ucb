@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use DB;
 
 class ReportesController extends Controller
 {
@@ -100,5 +102,23 @@ class ReportesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getListadoRotacion(){
+        $mes = Input::get('mes');
+        $gestion = Input::get('gestion');
+        $regional = Input::get('regional');
+
+        if($regional=='')$regional = 'NULL';
+        if($mes == ''){
+            $gestion= DB::select("SELECT max(gestion) as gestion from contratacion_mensual");
+            //dd($gestion[0]->gestion);
+            $gestion = $gestion[0]->gestion;
+            $mes = DB::select("SELECT max(mes) as mes from contratacion_mensual WHERE gestion= ".$gestion);
+            $mes = $mes[0]->mes;
+        }
+
+        $result = DB::select("call rotacionListado(".$mes.",".$gestion.",".$regional.")");
+        return response()->json($result);
     }
 }

@@ -15,6 +15,7 @@ Route::post('api/FinishExcel', 'ImportExcelController@finishExcel');
 Route::post('api/verificarmatched', 'ImportExcelController@verificarmatched');
 Route::post('api/jaro/{id_excel}', 'PersonaController@Ajax_Jaro');
 Route::post('api/correctperson', 'PersonaController@correctPerson');
+Route::post('api/getListadoRotacion', 'ReportesController@getListadoRotacion');
 
 
 

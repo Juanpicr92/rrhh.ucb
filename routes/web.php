@@ -21,5 +21,6 @@ Route::post('api/correctperson', 'PersonaController@correctPerson');
 Auth::routes();
 
 Route::resource('persona', 'PersonaController');
+Route::resource('reporte', 'ReportesController');
 Route::get('/task', 'PersonaController@getTasks')->name('datatable.tasks');
 

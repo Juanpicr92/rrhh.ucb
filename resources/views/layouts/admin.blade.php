@@ -63,6 +63,8 @@
     <script src="{{ asset('js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script>
     <script src="{{ asset('js/libs/dropzone/dropzone.min.js') }}"></script>
     <script src="{{ asset('js/loading-bar.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
 
 
 
@@ -77,7 +79,7 @@
 <div id="base">
     <!-- BEGIN CONTENT-->
     <div id="content">
-        @include('components.messages');
+        @include('components.messages')
         @yield('content')
     </div><!--end #content-->
     <!-- END CONTENT -->

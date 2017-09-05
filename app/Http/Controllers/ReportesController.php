@@ -121,4 +121,9 @@ class ReportesController extends Controller
         $result = DB::select("call rotacionListado(".$mes.",".$gestion.",".$regional.")");
         return response()->json($result);
     }
+
+    public function getYear(){
+        $result = DB::select("select distinct gestion from contratacion_mensual");
+        return response()->json($result);
+    }
 }

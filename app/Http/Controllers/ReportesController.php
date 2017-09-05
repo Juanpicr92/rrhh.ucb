@@ -117,6 +117,11 @@ class ReportesController extends Controller
             $mes = DB::select("SELECT max(mes) as mes from contratacion_mensual WHERE gestion= ".$gestion);
             $mes = $mes[0]->mes;
         }
+        if($gestion=='')
+        {
+            $gestion= DB::select("SELECT max(gestion) as gestion from contratacion_mensual");
+            $gestion = $gestion[0]->gestion;
+        }
 
         $result = DB::select("call rotacionListado(".$mes.",".$gestion.",".$regional.")");
         return response()->json($result);

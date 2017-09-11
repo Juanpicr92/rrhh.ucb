@@ -76,7 +76,16 @@ class ImportExcelController extends Controller
                                     'ap_casada' => $value->ap_casada,
                                     'nombres' => $value->materno,
                                     'admn' => $value->admn,
-                                    'acad' => $value->acad
+                                    'acad' => $value->acad,
+                        //----------new values---------------------------------------------
+                                    'departamento'=> $value->departamento,
+                                    'cargo'=>$value->cargo,
+                                    'nivel'=>$value->nivel,
+                                    'dedicacion'=>$value->dedicacion,
+                                    'vinculacion'=>$value->vinculacion,
+                                    'fechainicio'=>$value->fechainicio,
+                                    'fechafin'=>$value->fechafin,
+
                                 ];
 
                 }
@@ -130,7 +139,7 @@ class ImportExcelController extends Controller
 	    //beginTransaction();
 
 		// Run Queries
-	    $acct = DB::insert("INSERT  into contratacion_mensual (ci, nombre_completo, paterno, materno, ap_casada, nombres, regional, mes, gestion, is_adm, is_acad) select documento, nombre_completo, paterno, materno, ap_casada,nombres, regional, mes,gestion,admn, acad from aux_excel");
+	    $acct = DB::insert("INSERT  into experiencialaboral (ci, regional, mes, gestion, es_administrativo, es_docente,departamento,cargo,nivel,dedicacion,vinculacion,fechainicio,fechafin) select documento, regional, mes,gestion,admn, acad,departamento,cargo,nivel,dedicacion,vinculacion,fechainicio,fechafin from aux_excel");
 
 		// If there's an error
 		//    or queries don't do their job,

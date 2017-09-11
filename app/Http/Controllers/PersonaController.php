@@ -139,11 +139,14 @@ class PersonaController extends Controller
                                             ->where('id',$idExcel)->first();
             $personanueva = new Persona;
             $personanueva->documento = $personaexcel->documento;
+            //TODO change this to HASH CODE
+            $personanueva->id='1234567';
             $personanueva->paterno = $personaexcel->paterno;
             $personanueva->materno = $personaexcel->materno;
             $personanueva->nombres = $personaexcel->nombres;
-            $personanueva->nombre_completo = $personaexcel->nombre_completo;
             $personanueva->ap_casada = $personaexcel->ap_casada;
+            DB::table('aux_excel')->where('id',$idExcel)->update(['matched'=>1]);
+
             if($personanueva->save()){
             	$status=TRUE;
             	$message='Correccion Exitosa';

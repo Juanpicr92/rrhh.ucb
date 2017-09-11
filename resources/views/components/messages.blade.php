@@ -388,7 +388,7 @@
     }
 </style>
 
-<div id="modal-error" class="modal fade" role="dialog">
+<div id="modal-error" class="modal fade" role="dialog" style="z-index: 9999!important;">
     <div class="modalbox error col-sm-8 col-md-6 col-lg-5 center animate">
         <div class="icon">
             <span class="fa fa-close"></span>
@@ -409,5 +409,4 @@
         <!--/.icon-->
         <div id="mensaje-exito"></div>
     </div>
-
 </div>

@@ -32,6 +32,37 @@
     <link href="{{ asset('css/theme-1/libs/wizard/wizard.css') }}" rel="stylesheet" type='text/css'>
     <link href="{{ asset('css/theme-1/libs/bootstrap-datepicker/datepicker3.css') }}" rel="stylesheet">
     <link href="{{ asset('css/loading-bar.css') }}" rel="stylesheet">
+    <style>
+        .fullscreen{
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 0!important;
+        }
+    </style>
+    <script type="text/javascript">
+        function evalResponseForm(response,modal,form) {
+            if (response.status === true){
+                console.log(response.message);
+                $(modal).modal('hide');
+                $(form)[0].reset();
+                $('#modal-success').modal('toggle');
+                $('#mensaje-exito').empty();
+                $('#mensaje-exito').append('<h2>'+response.message+'</h2>');
+            }else {
+                $('#modal-error').modal('toggle');
+                $('#mensaje-error').empty();
+                $.each(response.message, function(index) {
+                    console.log(response.message)
+                    $('#mensaje-error').append('<h2>'+response.message[index]+'</h2>')
+                });
+
+            }
+        };
+    </script>
 
 
     <!-- END STYLESHEETS -->
@@ -89,4 +120,21 @@
 
 
 </body>
+<script type="text/javascript">
+    $('.btn-full').on('click', function () {
+        if ($(this).attr('type')=='compress'){
+            $(this).parent().parent().parent().parent().parent().removeClass('fullscreen');
+            $(this).removeAttr('type');
+            $(this).children().removeClass('fa-compress');
+            $(this).children().addClass('fa-expand');
+        }else {
+            $(this).parent().parent().parent().parent().parent().addClass('fullscreen');
+            $(this).addClass('compress');
+            $(this).attr('type','compress');
+            $(this).children().removeClass('fa-expand');
+            $(this).children().addClass('fa-compress');
+        }
+    });
+
+</script>
 </html>

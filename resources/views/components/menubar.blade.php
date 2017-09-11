@@ -28,6 +28,12 @@
                     <span class="title">Importar Excel</span>
                 </a>
             </li><!--end /menu-li -->
+            <li>
+                <a href="{{ route('reporte.index') }}" >
+                    <div class="gui-icon"><i class="fa fa-area-chart"></i></div>
+                    <span class="title">Reportes</span>
+                </a>
+            </li><!--end /menu-li -->
         </ul><!--end .main-menu -->
         <!-- END MAIN MENU -->
 

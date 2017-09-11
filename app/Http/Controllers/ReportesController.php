@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Rotacion;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Input;
 use DB;
 
@@ -15,25 +17,55 @@ class ReportesController extends Controller
      */
     public function index()
     {
+
+	    $years = DB::select( 'SELECT  DISTINCT gestion from rotacion;');
+	    $years = collect($years)->toArray();
+	    foreach ($years as $year){
+		    $irp = Rotacion::where(['regional'=> 'LA PAZ','gestion'=>$year->gestion])->orderBy('mes','ASC')->get()->toArray();
+		    foreach ($irp as $value){
+		    	$set[$year->gestion][$value['mes']-1]=$value['IRP'];
+		    }
+	    }
 	    $chartjs = app()->chartjs
-		    ->name('barChartTest')
-		    ->type('bar')
+		    ->name('lineChartTest')
+		    ->type('line')
 		    ->size(['width' => 400, 'height' => 200])
-		    ->labels(['Label x', 'Label y'])
+		    ->labels(['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'])
 		    ->datasets([
 			    [
-				    "label" => "My First dataset",
-				    'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-				    'data' => [69, 59]
+				    "label" => "2015",
+				    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+				    'borderColor' => "rgba(38, 185, 154, 0.7)",
+				    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+				    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+				    "pointHoverBackgroundColor" => "#fff",
+				    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+				    'data' => $set[2015],
 			    ],
 			    [
-				    "label" => "My First dataset",
-				    'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
-				    'data' => [65, 12]
+				    "label" => "2016",
+				    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+				    'borderColor' => "rgba(38, 185, 154, 0.7)",
+				    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+				    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+				    "pointHoverBackgroundColor" => "#fff",
+				    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+				    'data' => $set[2016],
+			    ],
+			    [
+				    "label" => "2017",
+				    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+				    'borderColor' => "rgba(38, 185, 154, 0.7)",
+				    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+				    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+				    "pointHoverBackgroundColor" => "#fff",
+				    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+				    'data' => $set[2017],
 			    ]
+
 		    ])
 		    ->options([]);
-
+		//dd($chartjs);
 
 	    return view('reportes/rotacion', compact('chartjs'));
     }
@@ -122,8 +154,11 @@ class ReportesController extends Controller
             $gestion= DB::select("SELECT max(gestion) as gestion from contratacion_mensual");
             $gestion = $gestion[0]->gestion;
         }
-
-        $result = DB::select("call rotacionListado(".$mes.",".$gestion.",".$regional.")");
+	    if ($regional === 'NULL'){
+		    $result = DB::select("call rotacionListado(".$mes.",".$gestion.",".$regional.")");
+	    }else{
+		    $result = DB::select("call rotacionListado(".$mes.",".$gestion.",'".$regional."')");
+	    }
         return response()->json($result);
     }
 

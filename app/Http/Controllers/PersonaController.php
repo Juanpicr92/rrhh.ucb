@@ -47,32 +47,44 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-	public function store()
+	public function store(Request $request)
 	{
-		// validate
-		// read more on validation at http://laravel.com/docs/validation
-		$rules = array(
-			'name'       => 'required',
-		);
-		$validator = Validator::make(Input::all(), $rules);
-		// process the login
+		$validator = Validator::make($request->all(), [
+			'name' => 'required',
+			'paterno' => 'required',
+		]);
+
 		if ($validator->fails()) {
-			return Redirect::to('persona/index')
-			               ->withErrors($validator);
+			$status = FALSE;
+			$message = $validator->errors();
 		} else {
-			// store
-			$nerd = new Persona();
-			$nerd->nombres = Input::get('name');
-			$nerd->id = '1234';
-			$birth = Input::get('birthDate');
-			$parts = explode('/',$birth);
-			$date = $parts[2] . '-' . $parts[0] . '-' . $parts[1];
-			$nerd->fechanacimiento =$date;
-			$nerd->save();
-			// redirect
-			Session::flash('message', 'Successfully created nerd!');
-			return Redirect::to('persona');
+			$persona = new Persona();
+			$persona ->nombres = strtoupper($request->name);
+			$persona ->paterno = strtoupper($request->paterno);
+			$persona ->materno = strtoupper($request->materno);
+			$persona ->documento = $request->ci;
+			$persona ->ap_casada = strtoupper($request->casada);
+			$persona ->regional = strtoupper($request->regional);
+			$persona ->fechanacimiento = $request->birthDate;
+			$persona ->nacionalidad = strtoupper($request->nacionalidad);
+			$persona ->genero = $request->genero;
+			$persona ->id = md5(trim(strtoupper($request->regional).strtoupper($request->paterno).strtoupper($request->materno).strtoupper($request->casada).strtoupper($request->name)));
+			$acct = $persona->save();
+			if( !$acct )
+			{
+				$status=FALSE;
+				$message='Ocurrió un error inesperado, inténtelo más tarde';
+			} else {
+				// Else commit the queries
+				$status=TRUE;
+				$message='Se registro la person de forma exitosa';
+			}
+
 		}
+		return response()->json([
+			'status' => $status,
+			'message' => $message,
+		]);
 	}
 
 
@@ -87,15 +99,10 @@ class PersonaController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+	    $persona = Persona::where('documento', $id)->get();
+	    return response()->json($persona);
     }
 
     /**
@@ -107,7 +114,42 @@ class PersonaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+	    $validator = Validator::make($request->all(), [
+		    'name' => 'required',
+		    'paterno' => 'required',
+	    ]);
+
+	    if ($validator->fails()) {
+		    $status = FALSE;
+		    $message = $validator->errors();
+	    } else {
+		    $persona = Persona::where('documento', $id)->first();
+		    $persona ->nombres = strtoupper($request->name);
+		    $persona ->paterno = strtoupper($request->paterno);
+		    $persona ->materno = strtoupper($request->materno);
+		    $persona ->documento = $request->ci;
+		    $persona ->ap_casada = strtoupper($request->casada);
+		    $persona ->regional = strtoupper($request->regional);
+		    $persona ->fechanacimiento = $request->birthDate;
+		    $persona ->nacionalidad = strtoupper($request->nacionalidad);
+		    $persona ->genero = $request->genero;
+		    $persona ->id = md5(trim(strtoupper($request->regional).strtoupper($request->paterno).strtoupper($request->materno).strtoupper($request->casada).strtoupper($request->name)));
+		    $acct = $persona->save();
+		    if( !$acct )
+		    {
+			    $status=FALSE;
+			    $message='Ocurrió un error inesperado, inténtelo más tarde';
+		    } else {
+			    // Else commit the queries
+			    $status=TRUE;
+			    $message='Se registro la person de forma exitosa';
+		    }
+
+	    }
+	    return response()->json([
+		    'status' => $status,
+		    'message' => $message,
+	    ]);
     }
 
     /**

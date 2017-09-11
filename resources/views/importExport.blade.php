@@ -289,7 +289,6 @@
                 data: $('#correct_form').serialize(),
                 success: function( response ) {
                     oTable.ajax.reload(null,false);
-                    console.log(response.status);
                     if (response.status === true){
                         console.log(response.message);
                         $('#myModal').modal('hide');

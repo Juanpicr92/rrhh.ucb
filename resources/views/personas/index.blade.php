@@ -201,7 +201,7 @@
 			oTable = $('#task').DataTable({
 				"processing": true,
 				"serverSide": true,
-				"ajax": "{{ route('datatable.tasks') }}",
+				"url": '/task',
 				"columns": [
 					{data: 'regional', name: 'regional'},
 					{data: 'documento', name: 'documento'},

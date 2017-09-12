@@ -201,7 +201,7 @@
 			oTable = $('#task').DataTable({
 				"processing": true,
 				"serverSide": true,
-				"url": '/task',
+				"ajax": '/task',
 				"columns": [
 					{data: 'regional', name: 'regional'},
 					{data: 'documento', name: 'documento'},

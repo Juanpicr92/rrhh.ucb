@@ -143,15 +143,15 @@ class ReportesController extends Controller
 
         if($regional=='')$regional = 'NULL';
         if($mes == ''){
-            $gestion= DB::select("SELECT max(gestion) as gestion from contratacion_mensual");
+            $gestion= DB::select("SELECT max(gestion) as gestion from experiencialaboral");
             //dd($gestion[0]->gestion);
             $gestion = $gestion[0]->gestion;
-            $mes = DB::select("SELECT max(mes) as mes from contratacion_mensual WHERE gestion= ".$gestion);
+            $mes = DB::select("SELECT max(mes) as mes from experiencialaboral WHERE gestion= ".$gestion);
             $mes = $mes[0]->mes;
         }
         if($gestion=='')
         {
-            $gestion= DB::select("SELECT max(gestion) as gestion from contratacion_mensual");
+            $gestion= DB::select("SELECT max(gestion) as gestion from experiencialaboral");
             $gestion = $gestion[0]->gestion;
         }
 	    if ($regional === 'NULL'){
@@ -163,7 +163,7 @@ class ReportesController extends Controller
     }
 
     public function getYear(){
-        $result = DB::select("select distinct gestion from contratacion_mensual");
+        $result = DB::select("select distinct gestion from experiencialaboral");
         return response()->json($result);
     }
 }

@@ -178,33 +178,10 @@ class PersonaController extends Controller
     public function correctPerson(){
         $documento = Input::get('documento');
         $idExcel = Input::get('id_excel');
+        $persona = Persona::where('documento', $documento)->get();
+        $id = $persona->id;
 
-        if ($documento=='NUEVO'){
-            $personaexcel =
-            $personanueva = new Persona;
-            $personanueva->documento = $personaexcel->documento;
-            //TODO change this to HASH CODE
-            $personanueva->id='1234567';
-            $personanueva->paterno = $personaexcel->paterno;
-            $personanueva->materno = $personaexcel->materno;
-            $personanueva->nombres = $personaexcel->nombres;
-            $personanueva->ap_casada = $personaexcel->ap_casada;
-            DB::table('aux_excel')->where('id',$idExcel)->update(['matched'=>1]);
-
-            if($personanueva->save()){
-            	$status=TRUE;
-            	$message='Correccion Exitosa';
-            }
-            else{
-	            $status=FALSE;
-	            $message='Ocurrió un error inesperado, inténtelo más tarde';
-            }
-
-        }
-        else
-        {
-
-	        if (DB::table('aux_excel')->where('id',$idExcel)->update(['documento'=>$documento, 'matched'=>1])){
+	        if (DB::table('aux_excel')->where('id',$idExcel)->update(['id'=> $id, 'documento'=>$documento, 'matched'=>1])){
 		        $status=TRUE;
 		        $message='Correccion Exitosa';
 	        }
@@ -212,7 +189,6 @@ class PersonaController extends Controller
 		        $status=FALSE;
 		        $message='Ocurrió un error inesperado, inténtelo más tarde';
 	        }
-        }
 	    return response()->json([
 		    'status' => $status,
 		    'message' => $message,

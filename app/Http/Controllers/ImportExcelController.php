@@ -139,6 +139,7 @@ class ImportExcelController extends Controller
 	    //beginTransaction();
 
 		// Run Queries
+        $result = DB::select("call matchID");
 	    $acct = DB::insert("INSERT  into experiencialaboral (id_persona,ci, regional, mes, gestion, es_administrativo, es_docente,departamento,cargo,nivel,dedicacion,vinculacion,fechainicio,fechafin) select id_persona, documento, regional, mes,gestion,admn, acad,departamento,cargo,nivel,dedicacion,vinculacion,fechainicio,fechafin from aux_excel");
 
 		// If there's an error

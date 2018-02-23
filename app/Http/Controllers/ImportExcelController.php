@@ -69,7 +69,6 @@ class ImportExcelController extends Controller
                 foreach ($data as $key => $value) {
 
                     $insert[] = [
-                                    'id' => $value->documento,
                                     'documento' => $value->documento,
                                     'nombre_completo' => $value->nombre_completo,
                                     'paterno' => $value->paterno,
@@ -140,7 +139,7 @@ class ImportExcelController extends Controller
 	    //beginTransaction();
 
 		// Run Queries
-	    $acct = DB::insert("INSERT  into experiencialaboral (id_persona,ci, regional, mes, gestion, es_administrativo, es_docente,departamento,cargo,nivel,dedicacion,vinculacion,fechainicio,fechafin) select id, documento, regional, mes,gestion,admn, acad,departamento,cargo,nivel,dedicacion,vinculacion,fechainicio,fechafin from aux_excel");
+	    $acct = DB::insert("INSERT  into experiencialaboral (id_persona,ci, regional, mes, gestion, es_administrativo, es_docente,departamento,cargo,nivel,dedicacion,vinculacion,fechainicio,fechafin) select id_persona, documento, regional, mes,gestion,admn, acad,departamento,cargo,nivel,dedicacion,vinculacion,fechainicio,fechafin from aux_excel");
 
 		// If there's an error
 		//    or queries don't do their job,

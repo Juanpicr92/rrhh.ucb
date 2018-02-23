@@ -181,7 +181,7 @@ class PersonaController extends Controller
         $persona = Persona::where('documento', $documento)->get();
         $id = $persona->id;
 
-	        if (DB::table('aux_excel')->where('id',$idExcel)->update(['id'=> $id, 'documento'=>$documento, 'matched'=>1])){
+	        if (DB::table('aux_excel')->where('id',$idExcel)->update(['id_persona'=> $id, 'documento'=>$documento, 'matched'=>1])){
 		        $status=TRUE;
 		        $message='Correccion Exitosa';
 	        }

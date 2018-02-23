@@ -152,17 +152,21 @@ class PersonaController extends Controller
 	    ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function getExcelPerson($id){
+        $person = $query = DB::table('aux_excel')
+            ->select('*')
+            ->where('id',$id)->first();
+        if(! is_null($person->nombre_completo)){
+            $nombres = explode(' ', $person->nombre_completo);
+            $person->paterno = $nombres[0];
+            unset($nombres[0]);
+            $person->materno = $nombres[1];
+            unset($nombres[1]);
+            $names = implode(' ',$nombres);
+            $person->nombres = $names;
+        }
+        return response()->json($person);
     }
-
 
 
 
@@ -176,9 +180,7 @@ class PersonaController extends Controller
         $idExcel = Input::get('id_excel');
 
         if ($documento=='NUEVO'){
-            $personaexcel = $query = DB::table('aux_excel')
-                                            ->select('*')
-                                            ->where('id',$idExcel)->first();
+            $personaexcel =
             $personanueva = new Persona;
             $personanueva->documento = $personaexcel->documento;
             //TODO change this to HASH CODE

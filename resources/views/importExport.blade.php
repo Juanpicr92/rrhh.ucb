@@ -14,7 +14,7 @@
                 <div class="col-md-12 form" role="form">
                     {!! Form::open(['action'=>'PersonaController@correctPerson','files'=>true, 'method'=>'POST', 'id'=>'correct_form']) !!}
                     <div class="row">
-                        <input type="hidden" class="form-group" id="id_excel" name="id_excel" value="">
+                        <input type="text" class="form-group" id="id_excel" name="id_excel" value="">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Posibles personas</label>
                             <div class="col-sm-9">
@@ -160,6 +160,92 @@
             <!-- END VALIDATION FORM WIZARD -->
         </div><!--end .card-body -->
     </div>
+
+    <div id="insertModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content card" style="padding: 30px">
+                <h2>Registro de Personas</h2>
+                <div class="col-md-12 form" role="form">
+                    {!! Form::open([ 'method'=>'POST','id'=>'personaForm']) !!}
+                    <div class="form-group floating-label {{ $errors->has('paterno') ? 'has-error' : ''}}">
+                        {!! Form::text('ci',null,['id'=>'ci', 'name'=>'ci', 'class'=>'form-control', 'value'=>"{{ old('ci') }}"]) !!}
+                        {!! Form::label('CI:') !!}
+                        <span class="text-danger">{{ $errors->first('paterno') }}</span>
+                    </div>
+                    <div class="form-group floating-label {{ $errors->has('paterno') ? 'has-error' : ''}}">
+                        {!! Form::text('paterno',null,['id'=>'paterno', 'name'=>'paterno', 'class'=>'form-control', 'value'=>"{{ old('paterno') }}"]) !!}
+                        {!! Form::label('Apellido Paterno:') !!}
+                        <span class="text-danger">{{ $errors->first('paterno') }}</span>
+                    </div>
+                    <div class="form-group floating-label {{ $errors->has('materno') ? 'has-error' : ''}}">
+                        {!! Form::text('materno',null,['id'=>'materno', 'name'=>'materno', 'class'=>'form-control', 'value'=>"{{ old('materno') }}"]) !!}
+                        {!! Form::label('Apellido Materno:') !!}
+                        <span class="text-danger">{{ $errors->first('materno') }}</span>
+                    </div>
+                    <div class="form-group floating-label {{ $errors->has('paterno') ? 'has-error' : ''}}">
+                        {!! Form::text('casada',null,['id'=>'casada', 'name'=>'casada', 'class'=>'form-control', 'value'=>"{{ old('casada') }}"]) !!}
+                        {!! Form::label('Apellido Casada:') !!}
+                        <span class="text-danger">{{ $errors->first('paterno') }}</span>
+                    </div>
+                    <div class="form-group floating-label {{ $errors->has('name') ? 'has-error' : ''}}">
+                        {!! Form::text('name',null,['id'=>'name', 'name'=>'name', 'class'=>'form-control', 'value'=>"{{ old('name') }}"]) !!}
+                        {!! Form::label('Nombres:') !!}
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group control-width-normal">
+                                <div class="input-group date" data-provide="datepicker">
+                                    <div class="input-group-content">
+                                        {!! Form::text('birthDate',null,['id'=>'birthDate', 'name'=>'birthDate', 'class'=>'form-control']) !!}
+                                        <label>Fecha nacimiento</label>
+                                    </div>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div><!--end .form-group -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group floating-label">
+                                <label for="regional">Regional</label>
+                                <select id="regional" name="regional" class="form-control">
+                                    <option value="">Seleccionar</option>
+                                    <option value="LA PAZ">La Paz</option>
+                                    <option value="SANTA CRUZ">Santa Cruz</option>
+                                    <option value="COCHABAMBA">Cochabamba</option>
+                                    <option value="EPC">EPC</option>
+                                    <option value="NACIONAL">Nacional</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group floating-label {{ $errors->has('nacionalidad') ? 'has-error' : ''}}">
+                                {!! Form::text('name',null,['id'=>'nacionalidad', 'name'=>'nacionalidad', 'class'=>'form-control', 'value'=>"{{ old('nacionalidad') }}"]) !!}
+                                {!! Form::label('Nacionalidad:') !!}
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group floating-label">
+                                <label for="genero">Genero</label>
+                                <select id="genero" name="genero" class="form-control">
+                                    <option value="">Seleccionar</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                    <button type="button" class="btn ink-reaction btn-floating-action btn-lg btn-success" id="store" style="color: #FFFFFF;position:absolute;right:80px;bottom:-55px"><i class="md md-save"></i></button>
+                    <button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-dismiss="modal" style="background: #ffc107;color: #FFFFFF;position:absolute;right:20px;bottom:-55px"><i class="md md-close"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <script type="text/javascript">
     Dropzone.options.myAwesomeDropzone = {
         success: function(){
@@ -283,26 +369,57 @@
 
     <script type="text/javascript">
         function corregir() {
+            if  ($('input:radio[name=documento]:checked').val() === 'NUEVO'){
+                $('#insertModal').modal('show');
+                id = $('#id_excel').val();
+                console.log(id);
+                $.ajax({
+                    type: "GET",
+                    url: '/api/personaExcel/'+id,
+                    data: {},
+                    success: function( response ) {
+                        $("#ci").val(response.documento).addClass('dirty');
+                        $("#paterno").val(response.paterno).addClass('dirty');
+                        $("#materno").val(response.materno).addClass('dirty');
+                        $("#name").val(response.nombres).addClass('dirty');
+                    }
+                });
+
+            }else{
+                $.ajax({
+                    type: "POST",
+                    url: '/api/correctperson',
+                    data: $('#correct_form').serialize(),
+                    success: function( response ) {
+                        oTable.ajax.reload(null,false);
+                        if (response.status === true){
+                            console.log(response.message);
+                            $('#myModal').modal('hide');
+                            $('#modal-success').modal('toggle');
+                            $('#mensaje-exito').empty();
+                            $('#mensaje-exito').append('<h2>'+response.message+'</h2>')
+                        }else {
+                            $('#modal-error').modal('toggle');
+                            $('#mensaje-error').empty();
+                            $('#mensaje-error').append('<h2>'+response.message+'</h2>')
+                        }
+                    }
+                });
+            }
+        }
+        function personaStore() {
             $.ajax({
                 type: "POST",
-                url: '/api/correctperson',
-                data: $('#correct_form').serialize(),
+                url: '/persona/store',
+                data: $('#personaForm').serialize(),
                 success: function( response ) {
-                    oTable.ajax.reload(null,false);
-                    if (response.status === true){
-                        console.log(response.message);
-                        $('#myModal').modal('hide');
-                        $('#modal-success').modal('toggle');
-                        $('#mensaje-exito').empty();
-                        $('#mensaje-exito').append('<h2>'+response.message+'</h2>')
-                    }else {
-                        $('#modal-error').modal('toggle');
-                        $('#mensaje-error').empty();
-                        $('#mensaje-error').append('<h2>'+response.message+'</h2>')
-                    }
+                    evalResponseForm(response,'#myModal','#personaForm',oTable );
                 }
             });
-        }
+        };
+        $('#store').on('click', function () {
+            personaStore();
+        });
     </script>
 
     <script type="text/javascript">

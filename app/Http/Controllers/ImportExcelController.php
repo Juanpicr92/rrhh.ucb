@@ -74,7 +74,7 @@ class ImportExcelController extends Controller
                                     'paterno' => $value->paterno,
                                     'materno' => $value->materno,
                                     'ap_casada' => $value->ap_casada,
-                                    'nombres' => $value->materno,
+                                    'nombres' => $value->nombres,
                                     'admn' => $value->admn,
                                     'acad' => $value->acad,
                         //----------new values---------------------------------------------

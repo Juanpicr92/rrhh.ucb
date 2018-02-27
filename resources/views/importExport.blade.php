@@ -136,6 +136,7 @@
                                         <option value="COCHABAMBA">Cochabamba</option>
                                         <option value="EPC">EPC</option>
                                         <option value="NACIONAL">Nacional</option>
+                                        <option value="TARIJA">Tarija</option>
                                     </select>
                                     <p class="help-block">Seleccione una Regional.</p>
                                 </div>

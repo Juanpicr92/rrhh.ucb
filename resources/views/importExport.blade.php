@@ -303,7 +303,11 @@
                 $("#id_excel").val(id);
                 $( "#listado_doc" ).empty();
                 $( "#nombre_excel" ).empty();
-                $( "#nombre_excel" ).append('<h2>'+rows['nombre_completo']+'</h2>');
+                if ( !rows['nombre_completo'] === null){
+                    $( "#nombre_excel" ).append('<h2>'+rows['nombre_completo']+'</h2>');
+                }else{
+                    $( "#nombre_excel" ).append('<h2>' + rows['paterno']+ ' ' + rows['materno']+ ' ' + rows['ap_casada']+ ' ' + rows['nombres']+ '</h2>');
+                }
                 $( "#listado_doc" ).append('<div class="radio radio-styled" id="listado_doc"> <label> <input type="radio" name="documento" value="NUEVO" checked=""> <span>Nueva persona</span> </label> </div>');
                 $.ajax({
                     type: "POST",

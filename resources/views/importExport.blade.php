@@ -216,6 +216,7 @@
                                     <option value="COCHABAMBA">Cochabamba</option>
                                     <option value="EPC">EPC</option>
                                     <option value="NACIONAL">Nacional</option>
+                                    <option value="TARIJA">Tarija</option>
                                 </select>
                             </div>
                         </div>

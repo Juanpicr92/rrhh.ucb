@@ -303,7 +303,7 @@
                 $("#id_excel").val(id);
                 $( "#listado_doc" ).empty();
                 $( "#nombre_excel" ).empty();
-                if ( !rows['nombre_completo'] === null){
+                if ( !rows['nombre_completo'] == null){
                     $( "#nombre_excel" ).append('<h2>'+rows['nombre_completo']+'</h2>');
                 }else{
                     $( "#nombre_excel" ).append('<h2>' + rows['paterno']+ ' ' + rows['materno']+ ' ' + rows['ap_casada']+ ' ' + rows['nombres']+ '</h2>');
@@ -324,7 +324,7 @@
                     success: function( response ) {
                         console.log(response);
                         $.each(response, function(index) {
-                            $( "#listado_doc" ).append('<div class="radio radio-styled" id="listado_doc"> <label> <input type="radio" name="documento" value="'+response[index].documento+'" checked=""> <span>'+response[index].paterno+' '+response[index].materno+' '+response[index].nombres+'</span> </label> </div>');
+                            $( "#listado_doc" ).append('<div class="radio radio-styled" id="listado_doc"> <label> <input type="radio" name="documento" value="'+response[index].documento+'" checked=""> <span>'+response[index].paterno+' '+response[index].materno+' '+response[index].ap_casada+' '+response[index].nombres+'</span> </label> </div>');
                         });
                     }
                 });

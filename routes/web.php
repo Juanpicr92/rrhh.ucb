@@ -24,6 +24,8 @@ Route::post('api/getYear', 'ReportesController@getYear');
 Auth::routes();
 
 Route::resource('persona', 'PersonaController');
+Route::resource('rotacion', 'RotacionController');
+Route::get('/rotacionTable', 'RotacionController@getTable')->name('datatable.rotacion');
 Route::post('persona/store','PersonaController@store');
 Route::resource('reporte', 'ReportesController');
 Route::get('/task', 'PersonaController@getTasks')->name('datatable.tasks');

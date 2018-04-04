@@ -81,6 +81,7 @@
     <script src="{{ asset('js/libs/autosize/jquery.autosize.min.js') }}"></script>
     <script src="{{ asset('js/libs/nanoscroller/jquery.nanoscroller.min.js') }}"></script>
     <script src="{{ asset('js/libs/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('js/libs/bootstrap-datepicker/locales/bootstrap-datepicker.es.js') }}"></script>
     <script src="{{ asset('js/core/source/App.js') }}"></script>
     <script src="{{ asset('js/core/source/AppNavigation.js') }}"></script>
     <script src="{{ asset('js/core/source/AppOffcanvas.js') }}"></script>
@@ -89,14 +90,19 @@
     <script src="{{ asset('js/core/source/AppNavSearch.js') }}"></script>
     <script src="{{ asset('js/core/source/AppVendor.js') }}"></script>
     <script src="{{ asset('js/core/demo/Demo.js') }}"></script>
-    <script src="{{ asset('js/libs/DataTables/jquery.dataTables.min.js') }}"></script>
+    <!--script src="{{ asset('js/libs/DataTables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/libs/DataTables/extensions/ColVis/js/dataTables.colVis.min.js') }}"></script>
-    <script src="{{ asset('js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script>
+    <script src="{{ asset('js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script-->
     <script src="{{ asset('js/libs/dropzone/dropzone.min.js') }}"></script>
     <script src="{{ asset('js/loading-bar.js') }}"></script>
+    <script src="{{ asset('js/core/demo/DemoFormComponents.js') }}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.0.0/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/r-2.2.1/datatables.min.js"></script>
 
 
 

@@ -22,7 +22,10 @@ class RotacionController extends Controller
      */
     public function index()
     {
-        return view('Contratacion/altasBajas');
+        DB::select("SET lc_time_names = 'es_ES'");
+        $date= DB::select("SELECT (date_format(max(inicio), '%M %Y')) as fecha  FROM gestion");
+        $fecha = ucwords($date[0]->fecha);
+        return view('Contratacion/altasBajas',compact('fecha'));
     }
 
 
@@ -41,6 +44,7 @@ class RotacionController extends Controller
             $inicio = $init[0]->id;
         }
         if ($fn = strtolower($datatables->request->get('fin'))) {
+            DB::select("SET lc_time_names = 'es_ES'");
             $final= DB::select("SELECT id  FROM gestion where date_format(inicio, '%M %Y') ='". $fn ."'");
             $fin = $final[0]->id;
         }

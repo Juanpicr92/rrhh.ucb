@@ -3,31 +3,38 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1  style-default-bright" style="margin-top: 10px;margin-left: 1%;width: 98%;">
             <form class="form-horizontal" id="search-form">
-                <div class="card">
+                <div class="card card-collapsed">
                     <div class="card-head style-primary">
+                        <div class="tools">
+                            <div class="btn-group">
+                                <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-up" style="font-size: 28px;"></i></a>
+                            </div>
+                        </div>
                         <header>Filtros</header>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="display: none;" >
                         <div class="row">
-                            <div class="col-sm-12">
-                                <h2 class="text-primary">Por Fechas:</h2>
-                                <div class="form-group" style="padding: 10px 25px">
+                            <div class="col-sm-6">
+                                <h3 class="text-primary" style="margin-top: 10px;">Por Fechas:</h3>
+                                <div class="form-group" style="padding: 0px 25px">
                                     <div class="input-daterange input-group" id="demo-date-range">
+                                        <span class="input-group-addon">Desde</span>
                                         <div class="input-group-content">
-                                            <input type="text" class="form-control" name="inicio"  id="inicio" />
-                                            <label>Desde</label>
+                                            <input type="text" class="form-control" name="inicio"  id="inicio" value="{{$fecha}}" />
                                         </div>
                                         <span class="input-group-addon">hasta</span>
                                         <div class="input-group-content">
-                                            <input type="text" class="form-control" name="fin"  id="fin"/>
+                                            <input type="text" class="form-control" name="fin"  id="fin" value="{{$fecha}}"/>
                                             <div class="form-control-line"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12">
-                                <h2 class="text-primary">Por Regionales:</h2>
-                                <div class="form-group" style="padding: 10px 25px">
+                                <h3 class="text-primary" style="margin-top: 10px;">Por Regionales:</h3>
+                                <div class="form-group" style="padding: 0px 25px">
                                     <div class="col-sm-9" id="regional">
                                         <label class="checkbox-inline checkbox-styled">
                                             <input name="regional[]"  type="checkbox" value="LA PAZ" checked="checked"><span>La Paz</span>
@@ -50,9 +57,11 @@
                                     </div><!--end .col -->
                                 </div><!--end .form-group -->
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12">
-                                <h2 class="text-primary">Por Tipos:</h2>
-                                <div class="form-group" style="padding: 10px 25px">
+                                <h3 class="text-primary" style="margin-top: 10px;">Por Tipos:</h3>
+                                <div class="form-group" style="padding: 0px 25px">
                                     <div class="col-sm-12" id="tipo">
                                         <label class="checkbox-inline checkbox-styled">
                                             <input name="tipó[]"  type="checkbox" value="ADMINISTRATIVO" checked="checked"><span>ADMINISTRATIVO</span>
@@ -82,20 +91,19 @@
                                 </div><!--end .form-group -->
                             </div>
                         </div>
-                    </div><!--end .card-body -->
-                    <div class="card-actionbar">
                         <div class="card-actionbar-row">
                             <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
                         </div>
-                    </div>
+                    </div><!--end .card-body -->
                 </div><!--end .card -->
             </form>
         </div><!--end .col -->
     </div><!--end .row -->
     <!-- END HORIZONTAL FORM -->
-    <section class="card col-md-11 col-md-offset-1  style-default-bright" style="margin-top: 10px;margin-left: 1%;width: 98%;">
+    <section class="card col-md-11 col-md-offset-1  style-default-bright" style="margin-top: -20px;margin-left: 1%;width: 98%;">
         <div class="section-body">
             <h2 class="text-primary">Listado de Altas y bajas</h2>
+            <h4 class="text-primary">Exportar lista a:</h4>
             <table id="task" class="table table-hover" style="width: 98%;font-size: smaller;">
                 <thead>
                 <tr>

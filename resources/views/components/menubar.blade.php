@@ -23,9 +23,9 @@
                 </a>
             </li><!--end /menu-li -->
             <li>
-                <a href="{{ route('importExport') }}" >
-                    <div class="gui-icon"><i class="md md-file-upload"></i></div>
-                    <span class="title">Importar Excel</span>
+                <a href="{{ route('rotacion.index') }}" >
+                    <div class="gui-icon"><i class="md md-autorenew"></i></div>
+                    <span class="title">Altas y bajas</span>
                 </a>
             </li><!--end /menu-li -->
             <li>

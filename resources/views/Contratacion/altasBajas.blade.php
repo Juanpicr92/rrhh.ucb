@@ -100,16 +100,17 @@
         </div><!--end .col -->
     </div><!--end .row -->
     <!-- END HORIZONTAL FORM -->
-    <section class="card col-md-11 col-md-offset-1  style-default-bright" style="margin-top: -20px;margin-left: 1%;width: 98%;">
+    <section class="card col-md-11 col-md-offset-1  style-default-bright" style="margin-top: -20px;margin-left: 1%;width: 98%;padding-top: 0px;">
         <div class="section-body">
             <h2 class="text-primary">Listado de Altas y bajas</h2>
             <h4 class="text-primary">Exportar lista a:</h4>
             <table id="task" class="table table-hover" style="width: 98%;font-size: smaller;">
                 <thead>
                 <tr>
+                    <th>N</th>
                     <th>Mes</th>
-                    <th>Estado</th>
-                    <th>CI</th>
+                    <th width="50px">Estado</th>
+                    <th width="80px">CI</th>
                     <th>Regional</th>
                     <th>Tipo</th>
                     <th>Cargo</th>
@@ -117,11 +118,8 @@
                 </tr>
                 </thead>
             </table>
-            <!--button type="button" class="btn ink-reaction btn-floating-action btn-lg" data-toggle="modal" style="background: #ffc107;color: #FFFFFF;position:absolute;top:33px; left:240px;" data-target="#myModal"><i class="md md-add"></i></button-->
         </div>
     </section>
-
-
     <script type="text/javascript">
         $.fn.datepicker.defaults.format = "yyyy-mm-dd";
         $(document).ready(function() {
@@ -148,6 +146,7 @@
                     }
                 },
                 "columns": [
+                    {data: 'mes', name: 'mes'},
                     {data: 'gestion', name: 'gestion'},
                     {data: 'estado', name: 'estado'},
                     {data: 'ci', name: 'ci'},

@@ -114,7 +114,7 @@
                     <th>Regional</th>
                     <th>Tipo</th>
                     <th>Cargo</th>
-                    <th>Departamento</th>
+
                 </tr>
                 </thead>
             </table>
@@ -152,8 +152,7 @@
                     {data: 'ci', name: 'ci'},
                     {data: 'regional', name: 'regional'},
                     {data: 'tipo', name: 'tipo'},
-                    {data: 'cargo_nuevo', name: 'cargo_nuevo'},
-                    {data: 'departamento', name: 'departamento'}
+                    {data: 'cargo_nuevo', name: 'cargo_nuevo'}
                 ]
 
             });
